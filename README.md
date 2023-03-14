@@ -8,3 +8,4 @@
 ## Harjoitustyö ideoita
 ### Caravan
 ### Mini Cactpot
+### Binary Tree visualizer
