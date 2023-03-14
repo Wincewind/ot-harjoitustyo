@@ -1,0 +1,114 @@
+sampessa@lx2-fuxi017:~/ot_viikko1/tiedostoja$ git log --stat | cat
+commit 58e73a9879def4aebdc7aa60e07300088a7024ba
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Tue Mar 14 12:44:04 2023 +0200
+
+    ilmeisesti identtisten poistettavien tiedostojen kanssa git olettaa, että näistä järjestyksessä ensimmäinen uudelleennimetään.
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 71f1b9e524dd6c1c2a7b4a89344a2eaad34b700b
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Tue Mar 14 12:36:54 2023 +0200
+
+    filut lisätty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 58f4faa52a4f371aade5987fb40e06108461826b
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Tue Mar 14 12:26:50 2023 +0200
+
+    aina vaan lisää muutoksia
+
+ eka.txt    | 8 ++++----
+ kolmas.txt | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit f78b694ca056187192d1b9eddf2332022d0ea555
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:46:59 2023 +0200
+
+    tiedosto uudelleennimetty
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit da307662f05e20c9f07129eaecb71193671e92d7
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:44:58 2023 +0200
+
+    toinen poistettu
+
+ toinen.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+commit eaaca280748e655c77ff1e62713df8aeed114313
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:41:43 2023 +0200
+
+    tekstiä muutettu
+
+ tiedosto.txt | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
+
+commit d67ccd0612fb919611cd330be9f97ea7a39f340c
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:39:11 2023 +0200
+
+    paljon tekstiä
+
+ tiedosto.txt | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+commit cf745131af52e4cbcebb6d45562109a0b23d9359
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:31:15 2023 +0200
+
+    alikansio lisätty
+
+ stuff/neljas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 5e2ad31ae64b2a028b53a9501c1c93a0866a53aa
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:29:40 2023 +0200
+
+    tiedostoja taas muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 3 +++
+ 2 files changed, 4 insertions(+)
+
+commit 90a3330ae288cd87bce050b360c4162f45ff88bd
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:27:17 2023 +0200
+
+    kolmas tiedosto lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 64e13f488b96f3884094bc0573912786220443ab
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:21:52 2023 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit eccaf29a798f5f4c279b67a0024525e8f683cc0b
+Author: Wincewind <86107954+Wincewind@users.noreply.github.com>
+Date:   Mon Mar 13 21:17:36 2023 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
