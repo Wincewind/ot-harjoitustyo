@@ -1,3 +1,6 @@
-## Tervetuloa tarkastelemaan tulevaa Ohjelmistotekniikan harjoitustyötä!
+# Ohjelmistotekniikka, harjoitustyö
+## Tehtävät
+### Viikko 1
+[gitlog.txt](laskarit/viikko1/gitlog.txt)
 
-- *Lisää tähän mahdollisia aiheita*
+[komentorivi.txt](laskarit/viikko1/komentorivi.txt)
