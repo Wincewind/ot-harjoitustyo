@@ -1,3 +1,4 @@
+## Tehtävä 3
 
 ```mermaid
 
@@ -13,18 +14,16 @@ sequenceDiagram
     activate engine
     engine->>tank: consume(5)
     activate tank
-    tank-->>engine: fuel_contents(35)
-    deactivate tank
-    engine-->>masiina: 
     deactivate engine
+    tank-->>masiina: fuel_contents(35)
+    deactivate tank
     masiina->>engine: is_running()
     activate engine
     engine->>tank: consume(10)
     activate tank
-    tank-->>engine: fuel_contents(25)
-    deactivate tank
-    engine-->>masiina: 
     deactivate engine
+    tank-->>masiina: fuel_contents(25)
+    deactivate tank
     masiina-->>main: 
     deactivate masiina
     
