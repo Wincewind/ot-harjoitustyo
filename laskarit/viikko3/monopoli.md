@@ -37,10 +37,7 @@
         rahat
       }
       
-      class Pelinappula{
-        ralliauto
-        muut
-      }
+      class Pelinappula
       
       class Noppa{
         tuota_silmaluku()
