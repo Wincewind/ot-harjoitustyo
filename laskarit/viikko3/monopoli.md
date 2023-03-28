@@ -12,17 +12,8 @@
       Ruutu <|-- Katu
       Ruutu <|-- VapaaParkki
       Ruutu <|-- Verottaja
-      Pelilauta "1" -- "1" Aloitusruutu
-      Pelilauta "1" -- "1" Vankila
-      Pelilauta "1" -- "1" MeneVankilaan
-      Pelilauta "1" -- "1" VapaaParkki
-      Pelilauta "1" -- "3" Sattuma
-      Pelilauta "1" -- "3" Yhteismaa
-      Pelilauta "1" -- "4" Asema
+      Pelilauta "1" -- "40" Ruutu
       Pelilauta "1" -- "2" Noppa
-      Pelilauta "1" -- "2" Laitos
-      Pelilauta "1" -- "2" Verottaja
-      Pelilauta "1" -- "22" Katu
       Pelaaja "1" ..> "1" Pelinappula
       Ruutu "1" -- "1" Pelinappula
       
