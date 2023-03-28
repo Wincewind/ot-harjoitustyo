@@ -55,7 +55,9 @@
         seuraava_ruutu
       }
       
-      class Kortti
+      class Kortti{
+       toiminto
+      }
       class Talo
       class Hotelli
 ```
