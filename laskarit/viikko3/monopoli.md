@@ -16,6 +16,7 @@
       Pelilauta "1" -- "2" Noppa
       Pelaaja "1" ..> "1" Pelinappula
       Ruutu "1" -- "1" Pelinappula
+      Pelilauta "1" -- "2..8" Pelaaja
       
       
       class Pelilauta{
@@ -46,8 +47,6 @@
       }
       
       class Ruutu{
-        pelinappula
-        edellinen_ruutu
         seuraava_ruutu
       }
       
