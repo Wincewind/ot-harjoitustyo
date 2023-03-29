@@ -32,8 +32,8 @@ sequenceDiagram
     deactivate ratikka6
     main->>bussi244: osta_lippu(kallen_kortti, 2)
     activate bussi244
-    ratikka6->>kallen_kortti: arvo
-    kallen_kortti-->>ratikka6: 1.5
+    bussi244->>kallen_kortti: arvo
+    kallen_kortti-->>bussi244: 1.5
     bussi244-->>main: False
     deactivate bussi244
     
