@@ -27,6 +27,7 @@ sequenceDiagram
     activate ratikka6
     ratikka6->>kallen_kortti: arvo
     kallen_kortti-->>ratikka6: 3
+    ratikka6->>ratikka6: 3 < 1.5
     ratikka6->>kallen_kortti: vahenna_arvoa(1.5)
     ratikka6-->>main: True
     deactivate ratikka6
@@ -34,6 +35,7 @@ sequenceDiagram
     activate bussi244
     bussi244->>kallen_kortti: arvo
     kallen_kortti-->>bussi244: 1.5
+    bussi244->>bussi244: 1.5 < 3.5
     bussi244-->>main: False
     deactivate bussi244
     
