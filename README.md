@@ -7,7 +7,14 @@
 ### Viikko 2
 [kattavuusraportti.png](laskarit/viikko2/kattavuusraportti.png)
 
-## Harjoitustyö ideoita
-### Caravan
-### Mini Cactpot
-### Binary Tree visualizer
+
+## Harjoitustyö
+[Vaatimusmaarittely.md](dokumentaatio/vaatimusmaarittely.md)
+
+[Tuntikirjanpito.md](dokumentaatio/tuntikirjanpito.md)
+
+
+### Harjoitustyö ideoita (aihe päätetty, mutta varalla jic...)
+#### Caravan
+#### Mini Cactpot
+#### Binary Tree visualizer

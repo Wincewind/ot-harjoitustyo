@@ -11,6 +11,7 @@ Peliin voi luoda käyttäjätiedot, joiden valinta ja luonti näkymä aukeaisi e
 
 Alla kuvankaappaus Fallout New Vegas:in pelikentästä, johon oltaisiin pyrkimässä:  
 
+![](./kuvat/pelikentta_hahmotelma.png)
 
 ## Perusversion toiminnallisuus
 
