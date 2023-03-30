@@ -9,9 +9,9 @@
 
 
 ## Harjoitustyö
-[Vaatimusmaarittely.md](dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmaarittely.md](caravan/dokumentaatio/vaatimusmaarittely.md)
 
-[Tuntikirjanpito.md](dokumentaatio/tuntikirjanpito.md)
+[Tuntikirjanpito.md](caravan/dokumentaatio/tuntikirjanpito.md)
 
 
 ### Harjoitustyö ideoita (aihe päätetty, mutta varalla jic...)
