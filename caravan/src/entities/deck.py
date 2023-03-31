@@ -1,8 +1,8 @@
 from random import shuffle
-try:
-    from entities.cardset import CardSet
-except ModuleNotFoundError:
-    from cardset import CardSet
+import sys
+from pathlib import Path
+sys.path.append(str(Path(sys.path[0]).parents[0]))
+from entities.cardset import CardSet
 
 class Deck:
     def __init__(self, cardset: CardSet) -> None:
@@ -22,10 +22,10 @@ class Deck:
             amount -= 1
         return new_cards
     
-if __name__=='__main__':
-    cardset = CardSet()
-    cardset.create_set_from_all_cards()
-    deck = Deck(cardset)
-    deck.shuffle()
-    print(deck.cards[0])
-    print(cardset.get_cards()[0])
+# if __name__=='__main__':
+#     cardset = CardSet()
+#     cardset.create_set_from_all_cards()
+#     deck = Deck(cardset)
+#     deck.shuffle()
+#     print(deck.cards[0])
+#     print(cardset.get_cards()[0])

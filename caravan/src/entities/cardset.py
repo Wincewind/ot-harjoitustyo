@@ -1,7 +1,7 @@
-try:
-    from entities.card import Card
-except ModuleNotFoundError:
-    from card import Card
+import sys
+from pathlib import Path
+sys.path.append(str(Path(sys.path[0]).parents[0]))
+from entities.card import Card
 
 class CardSet:
     sets = ['sylly','minime453']
