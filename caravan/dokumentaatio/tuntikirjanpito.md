@@ -5,6 +5,6 @@
 | 23.3. | 2    | lisätty 1. versio vaatimusmäärittelystä ja tuntikirjanpidosta |
 | 30.3. | 1  | Poetryn ja projekti hakemiston alustus |
 | 30.3. | 4,5  | Projektin kehitys aloitettu, lisätty luokkia peliä varten |
-| 31.3. | 1  | Alustettu task:ejä ja tehty muita pieniä muutoksia |
+| 31.3. | 2  | Alustettu task:ejä ja tehty muita pieniä muutoksia |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 8,5   | | 
+| yht   | 9,5   | | 
