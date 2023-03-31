@@ -17,26 +17,29 @@ def third_week_demo():
     car = player.caravans[0]
     while True:
         os.system('cls')
+        os.system('clear')
         print('Your Caravan:')
         print(car)
         print('Caravan value',car.value)
         print('Your hand:',player.get_hand_as_str())
         print()
         idx = 100
-        while  0 > idx or idx > 7:
-            try:
-                idx = input('Which card to add to Caravan? Input index [0-7] or quit by typing "quit":')
-                if idx == 'quit':
-                    break
-                else:
-                    idx = int(idx)
-            except ValueError:
-                pass
-            c = player.play_card(idx)
-            if c == None:
+        try:
+            idx = input('Which card to add to Caravan? Input index [0-7] or quit by typing "quit":')
+            if idx == 'quit':
                 break
             else:
-                car.insert_card(i,c)
+                idx = int(idx)
+                if 0 > idx or idx > 7:
+                    continue
+        except ValueError:
+            continue
+        c = player.play_card(idx)
+        if c == None:
+            break
+        else:
+            car.insert_card(i,c)
         i += 1
+        
 if __name__=='__main__':
     third_week_demo()
