@@ -10,6 +10,8 @@
 
 # Caravan
 
+Caravan on kahden pelaajan pelattava korttipeli, jota pelataan tavallisilla 52 korttipakan korteilla. Tämä versio pelistä on kehitetty käyttäen Pygame:a.
+
 ## Dokumentaatio
 
 - [Vaatimusmaarittely.md](caravan/dokumentaatio/vaatimusmaarittely.md)
@@ -26,14 +28,14 @@ poetry install
 
 ## Komentorivitoiminnot
 
-### Ohjelman suorittaminen
+### Pelin käynnistäminen
 
-Ohjelman pystyy suorittamaan komennolla:
+Pelin käynnistys tapahtuu suorittamalla komento:
 
 ```bash
 poetry run invoke start
 ```
-Tämän komennon aloittama ohjelma tulee kehittymään viikottain.
+Komennon käynnistämä peli tulee kehittymään viikkottain.
 
 ### Testaus
 
