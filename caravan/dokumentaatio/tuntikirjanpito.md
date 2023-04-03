@@ -8,4 +8,4 @@
 | 31.3. | 2  | Alustettu task:ejä ja tehty muita pieniä muutoksia |
 | 3.4. | 2  | Laajennettu hieman main vko 3 demoa ja päivitetty dokumentaatiota |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 9,5   | | 
+| yht   | 11,5   | | 
