@@ -6,5 +6,6 @@
 | 30.3. | 1  | Poetryn ja projekti hakemiston alustus |
 | 30.3. | 4,5  | Projektin kehitys aloitettu, lisätty luokkia peliä varten |
 | 31.3. | 2  | Alustettu task:ejä ja tehty muita pieniä muutoksia |
+| 3.4. | 2  | Laajennettu hieman main vko 3 demoa ja päivitetty dokumentaatiota |
 | dd.M. | h    | Lorem Ipsum |
 | yht   | 9,5   | | 
