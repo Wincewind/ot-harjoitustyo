@@ -11,12 +11,12 @@ class Card:
     def __str__(self) -> str:
         card_value = self.value
         if card_value == 0:
-            return f"{self.suit} - {self.set}"
+            return f"{self.suit}"# - {self.set}"
         if card_value == 1 or card_value > 10:
             specials = {1:'Ace',11:'Jack',12:'Queen',13:'King'}
             card_value = specials[card_value]
         
-        return f"{card_value} of {Card.suits[self.suit]} - {self.set}"
+        return f"{card_value} of {Card.suits[self.suit]}"# - {self.set}"
     
 
 if __name__=='__main__':

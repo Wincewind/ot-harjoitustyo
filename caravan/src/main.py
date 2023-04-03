@@ -6,6 +6,33 @@ from entities.deck import Deck
 from entities.player import Player
 from entities.cardset import CardSet
 
+def print_setup(p: Player):
+    os.system('cls')
+    #os.system('clear')
+    print('Your Caravans:')
+    print(p.get_caravans_as_str())
+    print('Caravan values:') 
+    print(f'{p.caravans[0].value:<15}{p.caravans[1].value:<15}{p.caravans[2].value:<15}')
+    print('Your hand:',p.get_hand_as_str())
+    print()
+
+def parse_idx_input_or_quit(p: Player, query: str, a: int, b: int):
+    while True:
+        print_setup(p)
+        try:
+            i = input(query)
+            if i == 'quit':
+                break
+            else:
+                i = int(i)
+                if a > i or i > b:
+                    continue
+                else:
+                    break
+        except ValueError:
+            continue
+    return i
+
 def third_week_demo():
     c_set = CardSet()
     c_set.create_set_from_all_cards()
@@ -14,31 +41,18 @@ def third_week_demo():
     player.deck.shuffle()
     player.deal_a_hand()
     i = 0
-    car = player.caravans[0]
     while True:
-        os.system('cls')
-        os.system('clear')
-        print('Your Caravan:')
-        print(car)
-        print('Caravan value',car.value)
-        print('Your hand:',player.get_hand_as_str())
-        print()
-        idx = 100
-        try:
-            idx = input('Which card to add to Caravan? Input index [0-7] or quit by typing "quit":')
-            if idx == 'quit':
-                break
-            else:
-                idx = int(idx)
-                if 0 > idx or idx > 7:
-                    continue
-        except ValueError:
-            continue
+        c_idx = parse_idx_input_or_quit(player,'Choose one of your Caravans. Input index [0-2] or quit by typing "quit":',0,2)
+        if c_idx == 'quit':
+            break
+        idx = parse_idx_input_or_quit(player,f'Which card to add to Caravan {c_idx}? Input index [0-7] or quit by typing "quit":',0,7)
+        if idx == 'quit':
+            break
         c = player.play_card(idx)
         if c == None:
             break
         else:
-            car.insert_card(i,c)
+            player.caravans[c_idx].insert_card(i,c)
         i += 1
         
 if __name__=='__main__':
