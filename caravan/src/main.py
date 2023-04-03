@@ -7,8 +7,10 @@ from entities.player import Player
 from entities.cardset import CardSet
 
 def print_setup(p: Player):
-    os.system('cls')
-    #os.system('clear')
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
     print('Your Caravans:')
     print(p.get_caravans_as_str())
     print('Caravan values:') 
