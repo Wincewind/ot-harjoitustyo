@@ -1,4 +1,4 @@
-# Caravan, Ohjelmistotekniikka harjoitustyö
+# Caravan, ohjelmistotekniikka harjoitustyö
 
 Caravan on kahden pelaajan pelattava korttipeli, jota pelataan tavallisilla 52 korttipakan korteilla. Tämä versio pelistä on kehitetty käyttäen Pygame:a.
 
