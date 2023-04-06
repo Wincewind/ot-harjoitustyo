@@ -1,12 +1,13 @@
 class Card:
-    suits = {'Diamonds': '\u2666', 'Hearts': '\u2665',
+    __suits = {'Diamonds': '\u2666', 'Hearts': '\u2665',
              'Clubs': '\u2663', 'Spades': '\u2660'}
-    values = list(range(14))
+    #__values = list(range(14))
 
     def __init__(self, c_set: str, suit: str, value: int, special=False) -> None:
         self.set = c_set
         self.suit = suit
         self.value = value
+        self.total = value
         self.special = special
 
     def __str__(self) -> str:
@@ -17,7 +18,7 @@ class Card:
             specials = {1: 'Ace', 11: 'Jack', 12: 'Queen', 13: 'King'}
             card_value = specials[card_value]
 
-        return f"{card_value} of {Card.suits[self.suit]}"  # - {self.set}"
+        return f"{card_value} of {Card.__suits[self.suit]}"  # - {self.set}"
 
 
 if __name__ == '__main__':

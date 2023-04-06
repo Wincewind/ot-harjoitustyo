@@ -19,7 +19,7 @@ class CardSet:
             for suit in CardSet.suits:
                 for value in CardSet.values:
                     special = False
-                    if value == 1 or value > 10:
+                    if value > 10:
                         special = True
                     self.__set.append(Card(c_set, suit, value, special))
             self.__set.append(Card(c_set, 'Black Joker', 0, True))

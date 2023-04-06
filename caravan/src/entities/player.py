@@ -19,11 +19,12 @@ class Player:
     def play_card(self, idx):
         if len(self.hand) == 0 or len(self.hand) < idx+1:
             return None
-        c = self.hand.pop(idx)
-        new_card = self.deck.deal_cards(1)
-        if len(new_card) > 0:
-            self.hand.insert(idx, new_card[0])
-        return c
+        card = self.hand.pop(idx)
+        if len(self.hand) < 5:
+            new_card = self.deck.deal_cards(1)
+            if len(new_card) > 0:
+                self.hand.append(new_card[0])
+        return card
 
     def get_hand_as_str(self):
         return [str(c) for c in self.hand]
@@ -41,7 +42,6 @@ class Player:
                     card_info.append(str(caravan.cards[i]))
             out += f'{card_info[0]:15} {card_info[1]:15} {card_info[2]:15}\n'
         return out
-
 
 if __name__ == '__main__':
     s = CardSet()
