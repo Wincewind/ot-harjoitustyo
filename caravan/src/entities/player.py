@@ -1,9 +1,10 @@
 import sys
-from pathlib import Path
-sys.path.append(str(Path(sys.path[0]).parents[0]))
-from entities.caravan import Caravan
-from entities.deck import Deck
-from entities.cardset import CardSet
+import os
+dirname = os.path.dirname(__file__)
+sys.path.append(os.path.join(dirname, ".."))
+from entities.caravan import Caravan # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
+from entities.deck import Deck # pylint: disable=wrong-import-position
+from entities.cardset import CardSet # pylint: disable=wrong-import-position
 
 class Player:
     def __init__(self, deck: Deck) -> None:
@@ -27,18 +28,18 @@ class Player:
         return [str(c) for c in self.hand]
     
     def get_caravans_as_str(self):
-        s = f'{"Caravan 1:":15} {"Caravan 2:":15} {"Caravan 3:":15}\n'
+        out = f'{"Caravan 1:":15} {"Caravan 2:":15} {"Caravan 3:":15}\n'
         longest_caravan_len = len(max(self.caravans, key=lambda c: len(c.cards)).cards)
         for i in range(longest_caravan_len):
             card_info = []
-            for c in self.caravans:
-                if len(c.cards) <= i:
+            for caravan in self.caravans:
+                if len(caravan.cards) <= i:
                     card_info.append('')
                 else:
-                    card_info.append(str(c.cards[i]))
-            s += f'{card_info[0]:15} {card_info[1]:15} {card_info[2]:15}\n'
-        return s
-    
+                    card_info.append(str(caravan.cards[i]))
+            out += f'{card_info[0]:15} {card_info[1]:15} {card_info[2]:15}\n'
+        return out
+
 if __name__=='__main__':
     s = CardSet()
     s.create_set_from_all_cards()

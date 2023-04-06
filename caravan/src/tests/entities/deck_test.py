@@ -21,11 +21,6 @@ class TestCardSetEntity(unittest.TestCase):
         self.assertEqual(len(deck.deal_cards(1)),1)
         self.assertEqual(type(deck.deal_cards(1)[0]),Card)
 
-    def test_dealing_one_card(self):
-        deck = Deck(self.cardset)
-        self.assertEqual(len(deck.deal_cards(1)),1)
-        self.assertEqual(type(deck.deal_cards(1)[0]),Card)
-
     def test_dealing_several_cards(self):
         deck = Deck(self.cardset)
         self.assertEqual(len(deck.deal_cards(8)),8)

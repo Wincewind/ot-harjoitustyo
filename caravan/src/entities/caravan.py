@@ -1,13 +1,14 @@
 import sys
-from pathlib import Path
-sys.path.append(str(Path(sys.path[0]).parents[0]))
-from entities.card import Card
+import os
+dirname = os.path.dirname(__file__)
+sys.path.append(os.path.join(dirname, ".."))
+from entities.card import Card # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
 
 class Caravan:
     def __init__(self) -> None:
         self.cards = []
         self.order_decending = True
-    
+
     def insert_card(self,idx: int, card: Card):
         #function call to check rules if a legal placement.
 
