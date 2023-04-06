@@ -7,6 +7,6 @@
 | 30.3. | 4.5  | Projektin kehitys aloitettu, lisätty luokkia peliä varten |
 | 31.3. | 2  | Alustettu task:ejä ja tehty muita pieniä muutoksia |
 | 3.4. | 2  | Laajennettu hieman main vko 3 demoa ja päivitetty dokumentaatiota |
-| 6.4. | 4  | Otettu pylint ja autopep käyttöön, implementoitu pelin sääntöjä ja niille tarkistuksia |
+| 6.4. | 6  | Otettu pylint ja autopep käyttöön, implementoitu pelin sääntöjä ja niille tarkistuksia |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 15.5   | | 
+| yht   | 17.5   | | 
