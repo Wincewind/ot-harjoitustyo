@@ -16,8 +16,8 @@ def print_setup(player: Player):
     print("Your Caravans:")
     print(player.get_caravans_as_str())
     print("Caravan values:")
-    print( # Not sure how to make this shorter without one time var assingments for the values.
-        f"{player.caravans[0].value:<15}{player.caravans[1].value:<15}{player.caravans[2].value:<15}" #pylint: disable=line-too-long
+    print(  # Not sure how to make this shorter without one time var assingments for the values.
+        f"{player.caravans[0].value:<15}{player.caravans[1].value:<15}{player.caravans[2].value:<15}"  # pylint: disable=line-too-long
     )
     print("Your hand:", player.get_hand_as_str())
     print()

@@ -1,19 +1,20 @@
+from entities.cardset import (  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
+    CardSet,
+)
 from random import shuffle
 import sys
 import os
 
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, ".."))
-from entities.cardset import ( # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
-    CardSet,
-)
+
 
 class Deck:
     def __init__(self, cardset: CardSet) -> None:
         self.cards = []
         if len(cardset) < 30:
             raise ValueError(
-                f"Caravan decks consist of at least 30 cards. Please add {30-len(cardset)} "+
+                f"Caravan decks consist of at least 30 cards. Please add {30-len(cardset)} " +
                 "more cards to the set."
             )
         else:

@@ -1,13 +1,14 @@
+from entities.card import Card  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
 import sys
 import os
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, ".."))
-from entities.card import Card # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
+
 
 class CardSet:
-    sets = ['sylly','minime453']
-    values = range(1,14)
-    suits = ['Spades','Clubs','Diamonds','Hearts']
+    sets = ['sylly', 'minime453']
+    values = range(1, 14)
+    suits = ['Spades', 'Clubs', 'Diamonds', 'Hearts']
 
     def __init__(self) -> None:
         self.__set = []
@@ -20,9 +21,9 @@ class CardSet:
                     special = False
                     if value == 1 or value > 10:
                         special = True
-                    self.__set.append(Card(c_set,suit,value,special))
-            self.__set.append(Card(c_set,'Black Joker',0,True))
-            self.__set.append(Card(c_set,'Red Joker',0,True))
+                    self.__set.append(Card(c_set, suit, value, special))
+            self.__set.append(Card(c_set, 'Black Joker', 0, True))
+            self.__set.append(Card(c_set, 'Red Joker', 0, True))
 
     def add_card(self, card: Card):
         self.__set.append(card)
