@@ -7,8 +7,10 @@ class Card:
         self.set = c_set
         self.suit = suit
         self.value = value
-        self.total = value
         self.special = special
+        if special:
+            self.total = 0
+        self.total = value
 
     def __str__(self) -> str:
         card_value = self.value

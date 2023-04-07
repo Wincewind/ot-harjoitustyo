@@ -67,7 +67,7 @@ def third_week_demo():
         crd = player.play_card(idx)
         if crd is None:
             break
-        player.caravans[c_idx].insert_card(i, crd)
+        player.caravans[c_idx].insert_card(crd, i)
         i += 1
 
 
