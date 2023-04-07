@@ -8,5 +8,6 @@
 | 31.3. | 2  | Alustettu task:ejä ja tehty muita pieniä muutoksia |
 | 3.4. | 2  | Laajennettu hieman main vko 3 demoa ja päivitetty dokumentaatiota |
 | 6.4. | 6  | Otettu pylint ja autopep käyttöön, implementoitu pelin sääntöjä ja niille tarkistuksia |
+| 7.4. | 2.5  | Lisätty sääntöihin tarkistuksia kuvakorteille |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 17.5   | | 
+| yht   | 20   | | 
