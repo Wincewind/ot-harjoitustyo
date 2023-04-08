@@ -43,14 +43,14 @@ class Player:
             out += f'{card_info[0]:15} {card_info[1]:15} {card_info[2]:15}\n'
         return out
 
-if __name__ == '__main__':
-    s = CardSet()
-    s.create_set_from_all_cards()
-    d = Deck(s)
-    p = Player(d)
-    p.deck.shuffle()
-    p.deal_a_hand()
-    p.caravans[0].insert_card(p.play_card(0))
-    p.caravans[1].insert_card(p.play_card(0))
-    p.caravans[2].insert_card(p.play_card(0))
-    print(p.get_caravans_as_str())
+# if __name__ == '__main__':
+#     s = CardSet()
+#     s.create_set_from_all_cards()
+#     d = Deck(s)
+#     p = Player(d)
+#     p.deck.shuffle()
+#     p.deal_a_hand()
+#     p.caravans[0].insert_card(p.play_card(0))
+#     p.caravans[1].insert_card(p.play_card(0))
+#     p.caravans[2].insert_card(p.play_card(0))
+#     print(p.get_caravans_as_str())

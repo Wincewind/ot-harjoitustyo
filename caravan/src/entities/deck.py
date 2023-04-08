@@ -30,7 +30,6 @@ class Deck:
             amount -= 1
         return new_cards
 
-
 # if __name__=='__main__':
 #     cardset = CardSet()
 #     cardset.create_set_from_all_cards()

@@ -10,7 +10,8 @@ class Card:
         self.special = special
         if special:
             self.total = 0
-        self.total = value
+        else:
+            self.total = value
 
     def __str__(self) -> str:
         card_value = self.value
