@@ -1,8 +1,8 @@
-from entities.card import Card  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
 import sys
 import os
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, ".."))
+from entities.card import Card  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
 
 
 class CardSet:

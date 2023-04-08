@@ -1,12 +1,11 @@
-from entities.cardset import (  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
-    CardSet,
-)
 from random import shuffle
 import sys
 import os
-
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, ".."))
+from entities.cardset import (  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
+    CardSet,
+)
 
 
 class Deck:
@@ -17,8 +16,7 @@ class Deck:
                 f"Caravan decks consist of at least 30 cards. Please add {30-len(cardset)} " +
                 "more cards to the set."
             )
-        else:
-            self.cards = cardset.get_cards()
+        self.cards = cardset.get_cards()
 
     def shuffle(self):
         shuffle(self.cards)

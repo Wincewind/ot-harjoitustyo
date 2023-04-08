@@ -1,7 +1,7 @@
 class Card:
     __suits = {'Diamonds': '\u2666', 'Hearts': '\u2665',
-             'Clubs': '\u2663', 'Spades': '\u2660'}
-    #__values = list(range(14))
+               'Clubs': '\u2663', 'Spades': '\u2660'}
+    # __values = list(range(14))
 
     def __init__(self, c_set: str, suit: str, value: int, special=False) -> None:
         self.set = c_set
