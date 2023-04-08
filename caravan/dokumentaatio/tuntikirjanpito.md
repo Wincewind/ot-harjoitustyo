@@ -9,5 +9,6 @@
 | 3.4. | 2  | Laajennettu hieman main vko 3 demoa ja päivitetty dokumentaatiota |
 | 6.4. | 6  | Otettu pylint ja autopep käyttöön, implementoitu pelin sääntöjä ja niille tarkistuksia |
 | 7.4. | 2.5  | Lisätty sääntöihin tarkistuksia kuvakorteille |
+| 8.4. | 1.5  | Viimeistelty sääntöjen käsittelyä, formatointia ja testikattavuutta |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 20   | | 
+| yht   | 21.5   | | 
