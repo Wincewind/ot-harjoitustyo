@@ -25,6 +25,17 @@ class CardSet:
             self.__set.append(Card(c_set, 'Black Joker', 0, True))
             self.__set.append(Card(c_set, 'Red Joker', 0, True))
 
+    def create_basic_set(self):
+        self.__set = []
+        for suit in CardSet.suits:
+            for value in CardSet.values:
+                special = False
+                if value > 10:
+                    special = True
+                self.__set.append(Card(CardSet.sets[0], suit, value, special))
+        self.__set.append(Card(CardSet.sets[0], 'Black Joker', 0, True))
+        self.__set.append(Card(CardSet.sets[0], 'Red Joker', 0, True))
+
     def add_card(self, card: Card):
         self.__set.append(card)
 

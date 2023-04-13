@@ -45,7 +45,7 @@ def putting_card_into_opponent_caravan(opponent, move):
 def using_number_card(move):
     caravan, idx, card = move
     c_ord_desc = caravan.order_decending
-    if idx != -1:
+    if idx < len(caravan.cards)-1 and idx != -1:
         return False
     if len(caravan.cards) > 0:
         for crd in caravan.cards[::-1]:
@@ -70,8 +70,6 @@ def using_number_card(move):
 
 def using_special_card(move):
     caravan, idx, card = move
-    if idx == 0:
-        return False
     # Queen can only be placed on top of the caravan.
     if card.value == 12 and idx != -1:
         return False
@@ -130,6 +128,23 @@ def double_total_with_king(move):
         if not caravan.cards[i].special:
             caravan.cards[i].total *= 2
             break
+
+def is_player_winner(player,opponent):
+    pcv = [c.value if 20 < c.value < 27 else -float('inf') for c in player.caravans]
+    ocv = [c.value if 20 < c.value < 27 else -float('inf') for c in opponent.caravans]
+    if sum(pcv) < 0 > sum(ocv):
+        return None
+    winning_caravans = 0
+    for i in range(3):
+        if pcv[i] > ocv[i]:
+            winning_caravans += 1
+        elif pcv[i] < ocv[i]:
+            winning_caravans -= 1
+    if winning_caravans == 0:
+        return None
+    if winning_caravans > 0:
+        return True
+    return False
 
 # def reverse_ordering(move):
 #     caravan, _, card = move
