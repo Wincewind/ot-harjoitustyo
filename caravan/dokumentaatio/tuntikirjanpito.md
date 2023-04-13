@@ -10,5 +10,6 @@
 | 6.4. | 6  | Otettu pylint ja autopep käyttöön, implementoitu pelin sääntöjä ja niille tarkistuksia |
 | 7.4. | 2.5  | Lisätty sääntöihin tarkistuksia kuvakorteille |
 | 8.4. | 1.5  | Viimeistelty sääntöjen käsittelyä, formatointia ja testikattavuutta |
+| 13.4. | 1  | Päivitetty dokumentaatiota |
 | dd.M. | h    | Lorem Ipsum |
 | yht   | 21.5   | | 
