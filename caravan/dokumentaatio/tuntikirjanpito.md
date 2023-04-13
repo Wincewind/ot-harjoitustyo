@@ -11,5 +11,6 @@
 | 7.4. | 2.5  | Lisätty sääntöihin tarkistuksia kuvakorteille |
 | 8.4. | 1.5  | Viimeistelty sääntöjen käsittelyä, formatointia ja testikattavuutta |
 | 13.4. | 1  | Päivitetty dokumentaatiota |
+| 13.4. | 4  | Tehty tekstipohjainen käyttöliittymä pelille |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 22.5   | | 
+| yht   | 26.5   | | 
