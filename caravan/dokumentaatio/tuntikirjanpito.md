@@ -12,4 +12,4 @@
 | 8.4. | 1.5  | Viimeistelty sääntöjen käsittelyä, formatointia ja testikattavuutta |
 | 13.4. | 1  | Päivitetty dokumentaatiota |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 21.5   | | 
+| yht   | 22.5   | | 
