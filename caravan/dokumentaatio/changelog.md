@@ -10,3 +10,4 @@
 - Lisätty moduuli "rules.py", jolla voidaan varmistaa kaikkia pelin keskeisiä sääntöjä, niin lailliset siirrot kuten myös kuvakorttien efektit.
 - Lisätty pelin tekstipohjaiselle käyttöliittymälle luokka GameInterface. 
   - Toteutettu tällä pelin ensimmäinen toimiva versio jota voi pelata kaksinpelinä ns. Hotseat-moninpelimuotona, eli samalta koneelta.
+  - Päivitetty main starttaamaan tämä versio poetry start:illa.
