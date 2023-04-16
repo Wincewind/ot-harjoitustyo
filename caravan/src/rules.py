@@ -6,7 +6,11 @@ from entities.player import Player
 # from entities.card import Card
 # from entities.cardset import CardSet
 # from entities.deck import Deck
+CARAVAN_MIN = 21
+CARAVAN_MAX = 26
 
+def check_if_caravan_ready(car_val: int):
+    return CARAVAN_MIN <= car_val <= CARAVAN_MAX
 
 def check_if_legal_move(player: Player, opponent: Player, move: tuple):
     _, _, card = move
@@ -130,8 +134,8 @@ def double_total_with_king(move):
             break
 
 def is_player_winner(player,opponent):
-    pcv = [c.value if 20 < c.value < 27 else -float('inf') for c in player.caravans]
-    ocv = [c.value if 20 < c.value < 27 else -float('inf') for c in opponent.caravans]
+    pcv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else -float('inf') for c in player.caravans]
+    ocv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else -float('inf') for c in opponent.caravans]
     if sum(pcv) < 0 > sum(ocv):
         return None
     winning_caravans = 0

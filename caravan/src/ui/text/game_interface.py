@@ -46,8 +46,8 @@ class GameInterface():
         print(  # Not sure how to make this shorter without one time var assingments for the values.
             f"{self.opponent.caravans[0].value:<15}{self.opponent.caravans[1].value:<15}{self.opponent.caravans[2].value:<15}"  # pylint: disable=line-too-long
         )
-        print('\U0001F0A0 '*len(self.opponent.hand))
-    
+        print('\U0001F0A0 '*len(self.opponent.hand)+'\n')
+   
         print("Your Caravans:")
         print(self.player.get_caravans_as_str())
         print("Caravan values:")
@@ -55,6 +55,7 @@ class GameInterface():
             f"{self.player.caravans[0].value:<15}{self.player.caravans[1].value:<15}{self.player.caravans[2].value:<15}"  # pylint: disable=line-too-long
         )
         print("Your hand:", self.player.get_hand_as_str())
+        print('Remaining cards in your deck:',len(self.player.deck.cards))
         print()
 
     def change_player_turn(self):
@@ -111,12 +112,14 @@ class GameInterface():
                         continue
                     breakit = True
                     break
-            
+
             if inputs_to_handle[i] == 'placement':
                 indexes[i] = self.parse_idx_input_or_quit(
                     'Where do you want to place the card? '
-                    "\n(If it's a number card, it has to be placed at the top of the deck with idx -1 or "
-                    f'{len(caravan.cards)-1}) \nInput index, cancel action with c or quit by typing "quit":',
+                    "\n(If it's a number card, it has to be placed at the top "
+                    "of the deck with idx -1 or "
+                    f'{len(caravan.cards)-1}) \nInput index, cancel action with '
+                    'c or quit by typing "quit":',
                     -2,
                     float('inf'))
                 if isinstance(indexes[i],str):
