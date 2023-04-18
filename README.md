@@ -45,3 +45,12 @@ poetry run invoke coverage-report
 ```
 
 Raportti generoituu _caravan/htmlcov/_-hakemistoon.
+
+
+### Pylint
+
+Laatutarkistuksen pytyy suorittamaan [.pylintrc](caravan/.pylintrc) määritysten mukaisesti komennolla:
+
+```bash
+poetry run invoke lint
+```
