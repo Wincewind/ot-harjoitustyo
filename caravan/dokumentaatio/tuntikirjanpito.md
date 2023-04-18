@@ -13,5 +13,6 @@
 | 13.4. | 1  | Päivitetty dokumentaatiota |
 | 13.4. | 4  | Tehty tekstipohjainen käyttöliittymä pelille |
 | 17.4. | 4.5  | Kehitetty pelin graafista käyttöliittymää |
+| 18.4. | 3.5  | Jatkettu pelin graafisen käyttöliittymän kehitystä |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 31   | | 
+| yht   | 34.5   | | 
