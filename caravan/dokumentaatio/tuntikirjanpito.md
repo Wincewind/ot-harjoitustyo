@@ -14,5 +14,6 @@
 | 13.4. | 4  | Tehty tekstipohjainen käyttöliittymä pelille |
 | 17.4. | 4.5  | Kehitetty pelin graafista käyttöliittymää |
 | 18.4. | 3.5  | Jatkettu pelin graafisen käyttöliittymän kehitystä |
+| 20.4. | 4.5    | Jatkettu pelin graafisen käyttöliittymän kehitystä, pelaajan vaihto korttien asetus karavaniin, etc. |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 34.5   | | 
+| yht   | 39   | | 
