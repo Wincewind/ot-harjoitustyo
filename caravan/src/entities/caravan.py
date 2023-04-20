@@ -42,3 +42,9 @@ class Caravan:
 
     def __str__(self) -> str:
         return ''.join(f'{str(c)}\n' for c in self.cards)
+
+    def __copy__(self):
+        caravan =  Caravan()
+        caravan.cards = self.cards.copy()
+        caravan.started = self.started
+        return caravan

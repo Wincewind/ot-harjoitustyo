@@ -49,7 +49,7 @@ def putting_card_into_opponent_caravan(opponent, move):
 def using_number_card(move):
     caravan, idx, card = move
     c_ord_desc = caravan.order_decending
-    if idx < len(caravan.cards)-1 and idx != -1:
+    if idx <= len(caravan.cards)-1 and idx != -1:
         return False
     if len(caravan.cards) > 0:
         for crd in caravan.cards[::-1]:
@@ -134,8 +134,10 @@ def double_total_with_king(move):
             break
 
 def is_player_winner(player,opponent):
-    pcv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else -float('inf') for c in player.caravans]
-    ocv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else -float('inf') for c in opponent.caravans]
+    pcv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else
+            -float('inf') for c in player.caravans]
+    ocv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else
+            -float('inf') for c in opponent.caravans]
     if sum(pcv) < 0 > sum(ocv):
         return None
     winning_caravans = 0
