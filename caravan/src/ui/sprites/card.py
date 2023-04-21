@@ -4,11 +4,12 @@ import pygame
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, "..",".."))
 from entities.card import Card
+from config import CARD_WIDTH, CARD_HEIGHT
 
 dirname = os.path.dirname(__file__)
 
 class CardSprite(pygame.sprite.Sprite):
-    CARD_DIMENSIONS = (100,130)
+    CARD_DIMENSIONS = (CARD_WIDTH, CARD_HEIGHT)
     OVERLAY_GREEN = (50, 168, 82, 128)
     OVERLAY_RED = (196, 65, 93, 128)
     OVERLAY_YELLOW = (255, 226, 99, 128)

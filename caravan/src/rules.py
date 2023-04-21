@@ -12,6 +12,11 @@ CARAVAN_MAX = 26
 def check_if_caravan_ready(car_val: int):
     return CARAVAN_MIN <= car_val <= CARAVAN_MAX
 
+def check_if_caravan_sold(car_val: int, opposing_car_val: int):
+    if check_if_caravan_ready(car_val) and car_val > opposing_car_val:
+        return True
+    return False
+
 def check_if_legal_move(player: Player, opponent: Player, move: tuple):
     _, _, card = move
     if not all_own_caravans_started_or_card_going_to_own_unstarted_caravan(player, move):
@@ -75,10 +80,18 @@ def using_number_card(move):
 def using_special_card(move):
     caravan, idx, card = move
     # Queen can only be placed on top of the caravan.
+    if idx == len(caravan.cards):
+        idx = -1
     if card.value == 12 and idx != -1:
         return False
-    if len(caravan.cards) == 0:
+    # Can't place picture card into an empty caravan.
+    if len(caravan.cards) == 0 or idx == 0:
         return False
+    # To make sure that other specials are removed,
+    # jack or joker can't be placed in between special and number cards.
+    if card.value in [11,0] and idx != -1:
+        if caravan.cards[idx].special:
+            return False
     return True
 
 
@@ -87,7 +100,7 @@ def get_cards_removed_by_jack(move):
     cards_to_remove = []
     if idx == -1:
         idx = len(caravan.cards) - 1
-    for i in range(idx, -1, -1):
+    for i in range(idx-1, -1, -1):
         cards_to_remove.append(caravan.cards[i])
         if not caravan.cards[i].special:
             break
@@ -99,36 +112,36 @@ def get_cards_removed_by_joker(player, opponent, move):
     cards_to_remove = []
     if idx == -1:
         idx = len(caravan.cards) - 1
-    for i in range(idx, -1, -1):
+    for i in range(idx-1, -1, -1):
         if not caravan.cards[i].special:
             protected = caravan.cards[i]
+            break
     remove_following_specials = False
-    for gamer in [player, opponent]:
-        for crvn in gamer.caravans:
-            for crd in crvn.cards:
-                if crd == protected:
-                    remove_following_specials = False
-                    continue
-                if not crd.special:
-                    remove_following_specials = False
-                    # If protected card was Ace, remove all of the same suit
-                    if protected.value == 1 and protected.suit == crd.suit:
-                        cards_to_remove.append(crd)
-                        remove_following_specials = True
-                    # If protected card was any other number card, remove all of the same value
-                    elif protected.value != 1 and protected.value == crd.value:
-                        cards_to_remove.append(crd)
-                        remove_following_specials = True
-                elif remove_following_specials:
+    for crvn in player.caravans + opponent.caravans:
+        for crd in crvn.cards:
+            if crd == protected:# and crvn == caravan:
+                remove_following_specials = False
+                continue
+            if not crd.special:
+                remove_following_specials = False
+                # If protected card was Ace, remove all of the same suit
+                if protected.value == 1 and protected.suit == crd.suit:
                     cards_to_remove.append(crd)
-    return cards_to_remove
+                    remove_following_specials = True
+                # If protected card was any other number card, remove all of the same value
+                elif protected.value != 1 and protected.value == crd.value:
+                    cards_to_remove.append(crd)
+                    remove_following_specials = True
+            elif remove_following_specials:
+                cards_to_remove.append(crd)
+    return (cards_to_remove,protected)
 
 
 def double_total_with_king(move):
     caravan, idx, _ = move
     if idx == -1:
         idx = len(caravan.cards) - 1
-    for i in range(idx, -1, -1):
+    for i in range(idx-1, -1, -1):
         if not caravan.cards[i].special:
             caravan.cards[i].total *= 2
             break
