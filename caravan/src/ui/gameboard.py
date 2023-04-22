@@ -1,9 +1,8 @@
 import os
 import sys
 import pygame
-from sprites.card import CardSprite
-from states.handselection import HandSelection
-from states.caravanplacement import CaravanPlacement
+from ui.states.handselection import HandSelection
+from ui.states.caravanplacement import CaravanPlacement
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, "..",".."))
 import config
@@ -11,13 +10,10 @@ from entities.card import Card
 from entities.cardset import CardSet
 from entities.deck import Deck
 from entities.player import Player
+#from sprites.card import CardSprite
 
 
 class Gameboard:
-    # WIDTH = 1600
-    # HEIGHT = 1000
-    # COLOR = (53,101,77)
-    #CARAVAN_BASE_COLOR = (202,154,178)
     def __init__(self, player: Player, opponent: Player):
         self.display = pygame.display.set_mode((config.BOARD_WIDTH, config.BOARD_HEIGHT))
         pygame.display.set_caption("Caravan")
@@ -26,7 +22,7 @@ class Gameboard:
         self.player_sprites = pygame.sprite.Group()
         self.opponent_sprites = pygame.sprite.Group()
         self.caravan_sprites = pygame.sprite.Group()
-        self.all_sprites = pygame.sprite.Group()
+        self._all_sprites = pygame.sprite.Group()
         
         self._initialize_display()
 
@@ -49,9 +45,17 @@ class Gameboard:
         CaravanPlacement(self).clear_caravan_area()
 
     def _initialize_sprites(self):
-        HandSelection(self).initialize_hand_sprites()
+        HandSelection(self).update_hand_sprites()
         
-        self.all_sprites.add(
+        self._all_sprites.add(
+            self.player_sprites,
+            self.opponent_sprites,
+            self.caravan_sprites
+        )
+    @property
+    def all_sprites(self):
+        self._all_sprites = pygame.sprite.Group()
+        self._all_sprites.add(
             self.player_sprites,
             self.opponent_sprites,
             self.caravan_sprites

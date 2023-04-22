@@ -1,6 +1,6 @@
 import pygame
-from sprites.card import CardSprite
-from states.caravanplacement import CaravanPlacement
+from ui.sprites.card import CardSprite
+# from states.caravanplacement import CaravanPlacement
 import config
 
 class HandSelection():
@@ -8,8 +8,8 @@ class HandSelection():
         self.board = gameboard
         self._player_selection = 0
         self.acting_player = acting_player
-        self.initialize_hand_sprites()
-        self.board.all_sprites.draw(self.board.display)
+        self.update_hand_sprites()
+        self.board._all_sprites.draw(self.board.display)
 
     def clear_player_area(self):
         if self.acting_player == self.board.player:
@@ -17,7 +17,7 @@ class HandSelection():
         else:
             self.board.display.fill(config.BOARD_COLOR,config.OPPONENT_AREA_RECT)
     
-    def initialize_hand_sprites(self):
+    def update_hand_sprites(self):
         self.player_hand_sprites = pygame.sprite.Group()
         if self.acting_player is None:
             cards_to_show = (False,False)
@@ -67,7 +67,7 @@ class HandSelection():
     @player_selection.setter
     def player_selection(self, a):
         self._player_selection = a
-        self.initialize_hand_sprites()
+        self.update_hand_sprites()
 
     def main_loop(self,acting_player):
         self.acting_player = acting_player
@@ -84,7 +84,7 @@ class HandSelection():
                         selected_card = self.player_hand_sprites.sprites()[self.player_selection]
                         caravan_placement = CaravanPlacement(self.board,self.acting_player,selected_card)
                         if caravan_placement.main_loop():
-                            self.initialize_hand_sprites()
+                            self.update_hand_sprites()
                             self.board.all_sprites.draw(self.board.display)
                             return True
                     if event.key == pygame.K_LEFT:

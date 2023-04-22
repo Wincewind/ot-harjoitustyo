@@ -39,4 +39,5 @@ for i in range(3):
     x += CARD_WIDTH + 100
 
 
-FONT = pygame.font.SysFont("Arial", 24)
+FONT = pygame.font.SysFont("Copperplate Gothic", 24)
+BIG_FONT = pygame.font.SysFont("Copperplate Gothic", 64)

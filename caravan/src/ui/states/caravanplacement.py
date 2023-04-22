@@ -1,5 +1,5 @@
-from sprites.card import CardSprite
-from entities.card import Card
+from ui.sprites.card import CardSprite
+# from entities.card import Card
 import rules
 import copy
 import pygame
@@ -25,14 +25,14 @@ class CaravanPlacement:
             else:
                 self.pl_display_caravans[0].insert_card(self.c_sprite.card)
                 self.pos = (0,len(self.pl_display_caravans[0].cards)-1)
-        self._update_caravan_sprites()
+        self.update_caravan_sprites()
         self.caravan_sprites.draw(self.board.display)
 
     def _reset_display_caravans(self):
         self.pl_display_caravans = tuple(copy.copy(c) for c in self.board.player.caravans)
         self.op_display_caravans = tuple(copy.copy(c) for c in self.board.opponent.caravans)
 
-    def _update_caravan_sprites(self):
+    def update_caravan_sprites(self):
         self.caravan_sprites = pygame.sprite.Group()
         player = self.acting_player
         opponent = self.opposing_player
@@ -129,7 +129,7 @@ class CaravanPlacement:
         caravan.insert_card(self.c_sprite.card,placement_idx)
         self.pos = (caravan_idx,placement_idx)
         self.clear_caravan_area()
-        self._update_caravan_sprites()
+        self.update_caravan_sprites()
         self.caravan_sprites.draw(self.board.display)
 
     def main_loop(self):
@@ -139,7 +139,7 @@ class CaravanPlacement:
                 if event.type == pygame.QUIT:
                     self._reset_display_caravans()
                     self.clear_caravan_area()
-                    self._update_caravan_sprites()
+                    self.update_caravan_sprites()
                     self.caravan_sprites.draw(self.board.display)
                     running = False
                 if event.type == pygame.KEYDOWN:
@@ -154,7 +154,7 @@ class CaravanPlacement:
                     if event.key == pygame.K_ESCAPE:
                         self._reset_display_caravans()
                         self.clear_caravan_area()
-                        self._update_caravan_sprites()
+                        self.update_caravan_sprites()
                         self.caravan_sprites.draw(self.board.display)
                         running = False
                     if event.key == pygame.K_SPACE:
@@ -169,7 +169,7 @@ class CaravanPlacement:
                         if actions.play_card(self.acting_player,self.opposing_player,move):
                             self._reset_display_caravans()
                             self.clear_caravan_area()
-                            self._update_caravan_sprites()
+                            self.update_caravan_sprites()
                             # self.caravan_sprites.draw(self.board.display)
                             # pygame.display.flip()
                             return True

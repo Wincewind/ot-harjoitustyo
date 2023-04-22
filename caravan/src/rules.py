@@ -13,8 +13,11 @@ def check_if_caravan_ready(car_val: int):
     return CARAVAN_MIN <= car_val <= CARAVAN_MAX
 
 def check_if_caravan_sold(car_val: int, opposing_car_val: int):
-    if check_if_caravan_ready(car_val) and car_val > opposing_car_val:
-        return True
+    if check_if_caravan_ready(car_val):
+        if not check_if_caravan_ready(opposing_car_val):
+            return True
+        if car_val > opposing_car_val:
+            return True
     return False
 
 def check_if_legal_move(player: Player, opponent: Player, move: tuple):
