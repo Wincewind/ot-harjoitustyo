@@ -16,6 +16,7 @@
 | 18.4. | 3.5  | Jatkettu pelin graafisen käyttöliittymän kehitystä |
 | 20.4. | 4.5    | Jatkettu pelin graafisen käyttöliittymän kehitystä, pelaajan vaihto korttien asetus karavaniin, etc. |
 | 21.4. | 7    | Saatu graaffisen käyttöliittymän 1. versio toimimaan ja aloitettu sen refaktorointi erilliseen game loop:iin |
-| 21.4. | 7    | Hienosäädetty gameloop:ia ja lisätty info:t pelin kontrolleille sekä voittajan tarkistus looppiin |
-| dd.M. | 2.5    | Lorem Ipsum |
-| yht   | 48.5   | | 
+| 22.4. | 2.5    | Hienosäädetty gameloop:ia ja lisätty info:t pelin kontrolleille sekä voittajan tarkistus looppiin |
+| 22.4. | 2    | Siivottu turhia tiedostoja ja lisätty testikattavuutta |
+| dd.M. | h    | Lorem Ipsum |
+| yht   | 50.5   | | 
