@@ -48,11 +48,11 @@ def fourth_week_demo():
 def fifth_week_demo():
     display = pygame.display.set_mode((config.BOARD_WIDTH, config.BOARD_HEIGHT))
     c_set = CardSet()
-    c_set.create_set_from_all_cards()
+    c_set.create_basic_set()
     deck = Deck(c_set)
     player = Player(deck)
     c_set = CardSet()
-    c_set.create_set_from_all_cards()
+    c_set.create_basic_set()
     deck = Deck(c_set)
     opponent = Player(deck)
     player.deck.shuffle()
