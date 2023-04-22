@@ -1,20 +1,9 @@
-import os
-import sys
+import pygame
 import rules
+import actions
 from ui.eventqueue import EventQueue
 from ui.renderer import Renderer
-from ui.sprites.card import CardSprite
 from ui.gamesprites import GameSprites
-dirname = os.path.dirname(__file__)
-sys.path.append(os.path.join(dirname, "..",".."))
-import pygame
-import config
-import actions
-from entities.card import Card
-from entities.cardset import CardSet
-from entities.deck import Deck
-from entities.player import Player
-import ui.instructions
 
 class GameLoop:
     def __init__(self, renderer: Renderer, game_sprites: GameSprites, event_queue: EventQueue):
@@ -114,23 +103,23 @@ class GameLoop:
     def _render(self):
         self._renderer.render()
 
-if __name__=='__main__':
-    display = pygame.display.set_mode((config.BOARD_WIDTH, config.BOARD_HEIGHT))
-    c_set = CardSet()
-    c_set.create_basic_set()
-    deck = Deck(c_set)
-    player = Player(deck)
-    c_set = CardSet()
-    c_set.create_basic_set()
-    deck = Deck(c_set)
-    opponent = Player(deck)
-    player.deck.shuffle()
-    player.deal_a_hand()
-    opponent.deck.shuffle()
-    opponent.deal_a_hand()
-    gs = GameSprites(display,player,opponent)
-    renderer = Renderer(display, gs)
-    event_queue = EventQueue()
-    gl = GameLoop(renderer,gs,event_queue)
-    gl.start()
+# if __name__=='__main__':
+#     display = pygame.display.set_mode((config.BOARD_WIDTH, config.BOARD_HEIGHT))
+#     c_set = CardSet()
+#     c_set.create_basic_set()
+#     deck = Deck(c_set)
+#     player = Player(deck)
+#     c_set = CardSet()
+#     c_set.create_basic_set()
+#     deck = Deck(c_set)
+#     opponent = Player(deck)
+#     player.deck.shuffle()
+#     player.deal_a_hand()
+#     opponent.deck.shuffle()
+#     opponent.deal_a_hand()
+#     gs = GameSprites(display,player,opponent)
+#     renderer = Renderer(display, gs)
+#     event_queue = EventQueue()
+#     gl = GameLoop(renderer,gs,event_queue)
+#     gl.start()
     
