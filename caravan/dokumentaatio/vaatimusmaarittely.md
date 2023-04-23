@@ -9,13 +9,15 @@ Caravan on kahden pelaajan pelattava korttipeli, jota pelataan tavallisilla 52 k
 
 - [x] Mahdollisimman aikaisen pelin pelaamisen mahdollistamiseksi, aloitetaan kehittämällä tekstipohjainen käyttöliittymä kaksinpelinä.
 
-Peliin voi luoda käyttäjätiedot, joiden valinta ja luonti näkymä aukeaisi ensin. Tämän jälkeen valitaan/kootaan pakka ja valitaan pelin aloitus.
+- [ ] Peliin voi luoda käyttäjätiedot, joiden valinta ja luonti näkymä aukeaisi ensin. Tämän jälkeen valitaan/kootaan pakka ja valitaan pelin aloitus.
 
-Alla kuvankaappaus Fallout New Vegas:in pelikentästä, johon oltaisiin pyrkimässä:  
+- [x] Alla kuvankaappaus Fallout New Vegas:in pelikentästä sekä omasta toteutetusta versiosta:
 
-![](./kuvat/pelikentta_hahmotelma.png)
+New Vegas             |  Oma pygame versio
+:-------------------------:|:-------------------------:
+![](./kuvat/pelikentta_hahmotelma.png)  |  ![](./kuvat/caravan_gameboard.png)
 
-## Perusversion toiminnallisuus
+## Perusversion toiminnallisuuksia
 
 ### Käyttäjätiedot ja pelipakan kokoaminen
 
@@ -28,6 +30,7 @@ Alla kuvankaappaus Fallout New Vegas:in pelikentästä, johon oltaisiin pyrkimä
 ### Pelaajat
 
 Vastuksen tekoälyn kehittämisen haasteellisuuden vuoksi, perusversion kehitys aloitetaan tavoitteena, että peliä pelataan samalta koneelta. Aloittava pelaaja saa nähdä kädessään olevat kortit ensin ja toinen pelaaja sulkee silmänsä kunnes hänen vuoronsa tulee. Pelaajan pelattua jonkun kortin, vuoro vaihtuu hetken viiveellä, jolloin toinen pelaaja saa avata silmänsä ja vuoronsa päättänyt sulkee omansa.
+- [x] Hotseat versio pelistä
 
 ## Jatkokehitysideoita
 
