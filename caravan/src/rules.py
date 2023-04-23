@@ -1,16 +1,12 @@
 from entities.player import Player
-# import os
-# import sys
-# dirname = os.path.dirname(__file__)
-# sys.path.append(os.path.join(dirname, ".."))
-# from entities.card import Card
-# from entities.cardset import CardSet
-# from entities.deck import Deck
+
 CARAVAN_MIN = 21
 CARAVAN_MAX = 26
 
+
 def check_if_caravan_ready(car_val: int):
     return CARAVAN_MIN <= car_val <= CARAVAN_MAX
+
 
 def check_if_caravan_sold(car_val: int, opposing_car_val: int):
     if check_if_caravan_ready(car_val):
@@ -20,13 +16,14 @@ def check_if_caravan_sold(car_val: int, opposing_car_val: int):
             return True
     return False
 
+
 def check_if_legal_move(player: Player, opponent: Player, move: tuple):
     _, _, card = move
     if not all_own_caravans_started_or_card_going_to_own_unstarted_caravan(player, move):
-        return (False, 'You need to start all your caravans before placing cards elsewhere. '+
+        return (False, 'You need to start all your caravans before placing cards elsewhere. ' +
                 'Cards need to be either Ace or 2-10 value card.')
     if not putting_card_into_opponent_caravan(opponent, move):
-        return (False, 'Only special cards (Jack, Queen, King, Joker) '+
+        return (False, 'Only special cards (Jack, Queen, King, Joker) ' +
                 'can be placed in opponents caravan.')
     if not card.special and not using_number_card(move):
         return (False, 'Illegal action for a number card.')
@@ -57,27 +54,26 @@ def putting_card_into_opponent_caravan(opponent, move):
 def using_number_card(move):
     caravan, idx, card = move
     c_ord_desc = caravan.order_decending
+    legal_move = True
     if idx <= len(caravan.cards)-1 and idx != -1:
-        return False
+        legal_move = False
     if len(caravan.cards) > 0:
-        for crd in caravan.cards[::-1]:
-            if not crd.special:
-                prev_value = crd.value
-                prev_suit = crd.suit
-                break
+        crd = next(c for c in caravan.cards[::-1] if not c.special)
+        prev_value = crd.value
+        prev_suit = crd.suit
         if prev_value == card.value:
-            return False
-        if c_ord_desc is None:
-            return True
+            legal_move = False
+        if legal_move and c_ord_desc is None:
+            return legal_move
         if caravan.cards[-1].value == 12:  # Queen determins the suit
             prev_suit = caravan.cards[-1].suit
-        if prev_suit == card.suit:
-            return True
+        if legal_move and prev_suit == card.suit:
+            return legal_move
         if c_ord_desc and prev_value <= card.value:
-            return False
+            legal_move = False
         if not c_ord_desc and prev_value >= card.value:
-            return False
-    return True
+            legal_move = False
+    return legal_move
 
 
 def using_special_card(move):
@@ -92,7 +88,7 @@ def using_special_card(move):
         return False
     # To make sure that other specials are removed,
     # jack or joker can't be placed in between special and number cards.
-    if card.value in [11,0] and idx != -1:
+    if card.value in [11, 0] and idx != -1:
         if caravan.cards[idx].special:
             return False
     return True
@@ -110,19 +106,12 @@ def get_cards_removed_by_jack(move):
     return cards_to_remove
 
 
-def get_cards_removed_by_joker(player, opponent, move):
-    caravan, idx, _ = move
+def _find_cards_to_remove(player, opponent, protected):
     cards_to_remove = []
-    if idx == -1:
-        idx = len(caravan.cards) - 1
-    for i in range(idx-1, -1, -1):
-        if not caravan.cards[i].special:
-            protected = caravan.cards[i]
-            break
     remove_following_specials = False
     for crvn in player.caravans + opponent.caravans:
         for crd in crvn.cards:
-            if crd == protected:# and crvn == caravan:
+            if crd == protected:  # and crvn == caravan:
                 remove_following_specials = False
                 continue
             if not crd.special:
@@ -137,7 +126,19 @@ def get_cards_removed_by_joker(player, opponent, move):
                     remove_following_specials = True
             elif remove_following_specials:
                 cards_to_remove.append(crd)
-    return (cards_to_remove,protected)
+    return cards_to_remove
+
+
+def get_cards_removed_by_joker(player, opponent, move):
+    caravan, idx, _ = move
+    if idx == -1:
+        idx = len(caravan.cards) - 1
+    for i in range(idx-1, -1, -1):
+        if not caravan.cards[i].special:
+            protected = caravan.cards[i]
+            break
+    cards_to_remove = _find_cards_to_remove(player, opponent, protected)
+    return (cards_to_remove, protected)
 
 
 def double_total_with_king(move):
@@ -149,11 +150,12 @@ def double_total_with_king(move):
             caravan.cards[i].total *= 2
             break
 
-def is_player_winner(player,opponent):
+
+def is_player_winner(player, opponent):
     pcv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else
-            -float('inf') for c in player.caravans]
+           -float('inf') for c in player.caravans]
     ocv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else
-            -float('inf') for c in opponent.caravans]
+           -float('inf') for c in opponent.caravans]
     if sum(pcv) < 0 > sum(ocv):
         return None
     winning_caravans = 0
@@ -167,28 +169,6 @@ def is_player_winner(player,opponent):
     if winning_caravans > 0:
         return True
     return False
-
-# def reverse_ordering(move):
-#     caravan, _, card = move
-#     c_ord_desc = caravan.order_decending
-#     if len([c for c in caravan.cards if not c.special]) < 2:
-#         return False
-#     if card.value == 12:
-#         return True
-#     for crd in caravan.cards[::-1]:
-#         if not crd.special:
-#             prev_value = crd.value
-#             prev_suit = crd.suit
-#             break
-#     if caravan.cards[-1].value == 12: #top Queen determins the suit
-#         prev_suit = caravan.cards[-1].suit
-#     if c_ord_desc and prev_value < card.value:
-#         if prev_suit == card.suit:
-#             return True
-#     if not c_ord_desc and prev_value > card.value:
-#         if prev_suit == card.suit:
-#             return True
-#     return False
 
 # if __name__=='__main__':
     # c_set = CardSet()

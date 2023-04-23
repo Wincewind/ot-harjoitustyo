@@ -5,23 +5,24 @@ from ui.eventqueue import EventQueue
 from ui.renderer import Renderer
 from ui.gamesprites import GameSprites
 
+
 class GameLoop:
     def __init__(self, renderer: Renderer, game_sprites: GameSprites, event_queue: EventQueue):
         pygame.display.set_caption("Caravan")
         self._renderer = renderer
         self._game_sprites = game_sprites
         self._event_queue = event_queue
-        self._states = ['turn_change','hand_selection','caravan_placement']
+        self._states = ['turn_change', 'hand_selection', 'caravan_placement']
         self._player_turn = True
 
     def start(self):
         while True:
-            if self._handle_events() == False:
+            if self._handle_events() is False:
                 break
 
             self._render()
 
-    def _handle_events(self): # pylint: disable=inconsistent-return-statements # Order needed for if __name__=='__main__': tests to work
+    def _handle_events(self):  # pylint: disable=inconsistent-return-statements # Order needed for if __name__=='__main__': tests to work
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
                 if self._states[0] == 'turn_change':
@@ -40,14 +41,14 @@ class GameLoop:
             if self._states[0] == 'game_over':
                 winner = 1
                 if rules.is_player_winner(self._game_sprites.player,
-                                self._game_sprites.opponent) is False:
+                                          self._game_sprites.opponent) is False:
                     winner = 2
                 self._renderer.winner = winner
-                
+
             if event.type == pygame.QUIT:
                 return False
 
-    def handle_card_selection_event(self,event):
+    def handle_card_selection_event(self, event):
         if event.key == pygame.K_SPACE:
             selected_card = self._game_sprites.select_card()
             self._states.append(self._states.pop(0))
@@ -57,24 +58,24 @@ class GameLoop:
         if event.key == pygame.K_RIGHT:
             self._game_sprites.player_selection += 1
         if event.key == pygame.K_ESCAPE:
-            self._states.insert(0,self._states.pop())
+            self._states.insert(0, self._states.pop())
             self._game_sprites.player_turn = None
 
-    def handle_caravan_selection_event(self,event):
+    def handle_caravan_selection_event(self, event):
         if event.key == pygame.K_LEFT:
-            self._game_sprites.move_card((-1,0))
+            self._game_sprites.move_card((-1, 0))
         if event.key == pygame.K_RIGHT:
-            self._game_sprites.move_card((1,0))
+            self._game_sprites.move_card((1, 0))
         if event.key == pygame.K_UP:
-            self._game_sprites.move_card((0,-1))
+            self._game_sprites.move_card((0, -1))
         if event.key == pygame.K_DOWN:
-            self._game_sprites.move_card((0,1))
+            self._game_sprites.move_card((0, 1))
         if event.key == pygame.K_ESCAPE:
-            self._states.insert(0,self._states.pop())
+            self._states.insert(0, self._states.pop())
             self._game_sprites.chosen_crd_sprite = None
         if event.key == pygame.K_SPACE:
             self.try_placing_card()
-    
+
     def try_placing_card(self):
         caravan_idx, placement_idx = self._game_sprites.pos
         if caravan_idx in range(3):
@@ -84,21 +85,21 @@ class GameLoop:
         move = (caravan,
                 placement_idx,
                 self._game_sprites.chosen_crd_sprite.card)
-        
+
         acting_player = self._game_sprites.player
         opposing_player = self._game_sprites.opponent
         if not self._player_turn:
             acting_player, opposing_player = opposing_player, acting_player
         if actions.play_card(acting_player,
-                                opposing_player,move):
+                             opposing_player, move):
             self._game_sprites.player_turn = None
             self._game_sprites.chosen_crd_sprite = None
             self._player_turn = not self._player_turn
             self._states.append(self._states.pop(0))
             self._game_sprites.update_caravan_sprites()
             if rules.is_player_winner(self._game_sprites.player,
-                        self._game_sprites.opponent) is not None:
-                self._states.insert(0,"game_over")
+                                      self._game_sprites.opponent) is not None:
+                self._states.insert(0, "game_over")
 
     def _render(self):
         self._renderer.render()
@@ -122,4 +123,3 @@ class GameLoop:
 #     event_queue = EventQueue()
 #     gl = GameLoop(renderer,gs,event_queue)
 #     gl.start()
-    

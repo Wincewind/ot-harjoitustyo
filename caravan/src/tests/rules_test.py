@@ -193,7 +193,8 @@ class TestRules(unittest.TestCase):
         self.player.caravans[0].insert_card(s5)
         self.player.caravans[0].insert_card(sq)
         self.assertEqual(self.player.caravans[0].value, 7)
-        move = (self.player.caravans[0], len(self.player.caravans[0].cards), hk)
+        move = (self.player.caravans[0], len(
+            self.player.caravans[0].cards), hk)
         rules.double_total_with_king(move)
         self.assertEqual(self.player.caravans[0].value, 12)
         self.assertEqual(self.player.caravans[0].cards[1].total, 10)
@@ -203,7 +204,8 @@ class TestRules(unittest.TestCase):
         self.assertEqual(self.player.caravans[0].cards[0].total, 4)
 
     def test_winner(self):
-        self.assertEqual(rules.is_player_winner(self.player,self.opponent), None)
+        self.assertEqual(rules.is_player_winner(
+            self.player, self.opponent), None)
         s10 = Card(None, 'Spades', 10, False)
         h10 = Card(None, 'Hearts', 10, False)
         s5 = Card(None, 'Spades', 5, False)
@@ -218,7 +220,8 @@ class TestRules(unittest.TestCase):
         self.opponent.caravans[0].insert_card(copy.copy(s10))
         self.opponent.caravans[1].insert_card(copy.copy(s10))
         self.opponent.caravans[2].insert_card(copy.copy(s10))
-        self.assertEqual(rules.is_player_winner(self.player,self.opponent), None)
+        self.assertEqual(rules.is_player_winner(
+            self.player, self.opponent), None)
         move = (self.player.caravans[0], 1, hk)
         rules.double_total_with_king(move)
         move = (self.player.caravans[1], 1, hk)
@@ -228,7 +231,8 @@ class TestRules(unittest.TestCase):
         self.player.caravans[0].insert_card(s5)
         self.player.caravans[1].insert_card(s5)
         self.player.caravans[2].insert_card(s5)
-        self.assertEqual(rules.is_player_winner(self.player,self.opponent), True)
+        self.assertEqual(rules.is_player_winner(
+            self.player, self.opponent), True)
         move = (self.opponent.caravans[0], 1, hk)
         rules.double_total_with_king(move)
         move = (self.opponent.caravans[1], 1, hk)
@@ -238,11 +242,13 @@ class TestRules(unittest.TestCase):
         self.opponent.caravans[0].insert_card(s5)
         self.opponent.caravans[1].insert_card(s5)
         self.opponent.caravans[2].insert_card(s5)
-        self.assertEqual(rules.is_player_winner(self.player,self.opponent), None)
+        self.assertEqual(rules.is_player_winner(
+            self.player, self.opponent), None)
         move = (self.player.caravans[0], 1, hk)
         rules.double_total_with_king(move)
-        self.assertEqual(rules.is_player_winner(self.player,self.opponent), False)
+        self.assertEqual(rules.is_player_winner(
+            self.player, self.opponent), False)
         move = (self.opponent.caravans[0], 1, hk)
         rules.double_total_with_king(move)
-        self.assertEqual(rules.is_player_winner(self.player,self.opponent), None)
-        
+        self.assertEqual(rules.is_player_winner(
+            self.player, self.opponent), None)

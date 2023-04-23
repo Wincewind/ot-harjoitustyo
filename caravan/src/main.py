@@ -40,13 +40,16 @@ from ui.text.game_interface import GameInterface
 #         player.caravans[c_idx].insert_card(crd, i)
 #         i += 1
 
+
 def fourth_week_demo():
     game_int = GameInterface()
     game_int.game_setup()
     game_int.game_loop()
 
+
 def fifth_week_demo():
-    display = pygame.display.set_mode((config.BOARD_WIDTH, config.BOARD_HEIGHT))
+    display = pygame.display.set_mode(
+        (config.BOARD_WIDTH, config.BOARD_HEIGHT))
     c_set = CardSet()
     c_set.create_basic_set()
     deck = Deck(c_set)
@@ -59,14 +62,14 @@ def fifth_week_demo():
     player.deal_a_hand()
     opponent.deck.shuffle()
     opponent.deal_a_hand()
-    game_sprites = GameSprites(display,player,opponent)
+    game_sprites = GameSprites(display, player, opponent)
     renderer = Renderer(display, game_sprites)
     event_queue = EventQueue()
-    game_loop = gameloop.GameLoop(renderer,game_sprites,event_queue)
+    game_loop = gameloop.GameLoop(renderer, game_sprites, event_queue)
     game_loop.start()
 
 
 if __name__ == "__main__":
-    #third_week_demo()
-    #fourth_week_demo()
+    # third_week_demo()
+    # fourth_week_demo()
     fifth_week_demo()

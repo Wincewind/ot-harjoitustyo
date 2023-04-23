@@ -1,10 +1,5 @@
-import sys
-import os
-dirname = os.path.dirname(__file__)
-sys.path.append(os.path.join(dirname, ".."))
-# from entities.cardset import CardSet  # pylint: disable=wrong-import-position
-from entities.deck import Deck  # pylint: disable=wrong-import-position
-from entities.caravan import Caravan  # pylint: disable=wrong-import-position # Order needed for if __name__=='__main__': tests to work
+from entities.caravan import Caravan
+from entities.deck import Deck
 
 
 class Player:

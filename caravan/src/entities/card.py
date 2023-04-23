@@ -24,9 +24,9 @@ class Card:
         return f"{card_value} of {Card.__suits[self.suit]}"  # - {self.set}"
 
     def __copy__(self):
-        return Card(self.set,self.suit,self.value,self.special)
+        return Card(self.set, self.suit, self.value, self.special)
 
 
-if __name__ == '__main__':
-    c = Card('test', 'Hearts', 12)
-    print(c)
+# if __name__ == '__main__':
+#     c = Card('test', 'Hearts', 12)
+#     print(c)
