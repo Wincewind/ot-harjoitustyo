@@ -19,5 +19,6 @@
 | 22.4. | 2.5    | Hienosäädetty gameloop:ia ja lisätty info:t pelin kontrolleille sekä voittajan tarkistus looppiin |
 | 22.4. | 2    | Siivottu turhia tiedostoja ja lisätty testikattavuutta |
 | 23.4. | 1    | Korjattu koodin formatointia ja lint virheitä |
+| 23.4. | 1    | Päivitetty dokumentaatiota |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 51.5   | | 
+| yht   | 52.5   | | 
