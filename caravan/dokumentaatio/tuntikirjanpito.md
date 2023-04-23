@@ -18,5 +18,6 @@
 | 21.4. | 7    | Saatu graaffisen käyttöliittymän 1. versio toimimaan ja aloitettu sen refaktorointi erilliseen game loop:iin |
 | 22.4. | 2.5    | Hienosäädetty gameloop:ia ja lisätty info:t pelin kontrolleille sekä voittajan tarkistus looppiin |
 | 22.4. | 2    | Siivottu turhia tiedostoja ja lisätty testikattavuutta |
+| 23.4. | 1    | Korjattu koodin formatointia ja lint virheitä |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 50.5   | | 
+| yht   | 51.5   | | 
