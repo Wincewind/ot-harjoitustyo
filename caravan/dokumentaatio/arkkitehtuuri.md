@@ -44,3 +44,28 @@ Pelin säännöt/toimintalogiikka löytyy [rules.py](https://github.com/Wincewin
 - `get_cards_removed_by_jack(move) -> list`
 - `get_cards_removed_by_joker(player, opponent, move) -> list`
 - `double_total_with_king(move) -> None`
+
+## Pelin tietomallien alustus
+Ennen kun peli voidaan aloittaa, täytyy kaksi pelaajaa luoda Player luokista ja nämä alustaa muilla luokilla. Oleellista on, ettei näitä luodessa käytetä viittauksia, esim. samaa deck oliota kummallakin pelaajalla, koska pelin mekaaniikkojen määrityksessä ja sääntöjen tarkistuksessa saatetaan hyödyntää viittauksia näihin olioihin.
+Yhden pelaaja-olion alustaminen tapahtuu seuraavasti:
+```mermaid
+sequenceDiagram
+  actor main
+  participant c_set
+  participant Card
+  participant deck
+  participant player
+  main->>c_set: CardSet()
+  main->>c_set: create_basic_set()
+  activate c_set
+  loop for suit in CardSet.suits, for value in CardSet.values
+  c_set ->> Card: Card(set, suit, value, special)
+  end
+  deactivate c_set
+  main->>deck: Deck(c_set)
+  deck->>deck: len(c_set) > 29
+  deck->>c_set: get_cards()
+  c_set-->>deck: __set.copy()
+  main->>player: Player(deck)
+  player->>caravans: (Caravan(), Caravan(), Caravan())
+```
