@@ -20,5 +20,6 @@
 | 22.4. | 2    | Siivottu turhia tiedostoja ja lisätty testikattavuutta |
 | 23.4. | 1    | Korjattu koodin formatointia ja lint virheitä |
 | 23.4. | 1    | Päivitetty dokumentaatiota |
+| 26.4. | 3.5    | Aloitettu pelaaja datan luomis/hallinnointi toiminnallisuuden toteuttamista |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 52.5   | | 
+| yht   | 56   | | 
