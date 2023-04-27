@@ -3,3 +3,7 @@ __pycache__
 .coverage
 htmlcov
 .vscode
+
+# data files
+caravan/data/player_data.sqlite
+caravan/data/test-player_data.sqlite

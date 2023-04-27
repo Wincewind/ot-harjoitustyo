@@ -1,8 +1,9 @@
 from entities.card import Card
+from config import AVAILABLE_CARDSETS
 
 
 class CardSet:
-    sets = ['sylly', 'minime453']
+    sets = AVAILABLE_CARDSETS
     values = range(1, 14)
     suits = ['Spades', 'Clubs', 'Diamonds', 'Hearts']
 
@@ -21,16 +22,16 @@ class CardSet:
             self.__set.append(Card(c_set, 'Black Joker', 0, True))
             self.__set.append(Card(c_set, 'Red Joker', 0, True))
 
-    def create_basic_set(self):
+    def create_basic_set(self,set_name=sets[0]):
         self.__set = []
         for suit in CardSet.suits:
             for value in CardSet.values:
                 special = False
                 if value > 10:
                     special = True
-                self.__set.append(Card(CardSet.sets[0], suit, value, special))
-        self.__set.append(Card(CardSet.sets[0], 'Black Joker', 0, True))
-        self.__set.append(Card(CardSet.sets[0], 'Red Joker', 0, True))
+                self.__set.append(Card(set_name, suit, value, special))
+        self.__set.append(Card(set_name, 'Black Joker', 0, True))
+        self.__set.append(Card(set_name, 'Red Joker', 0, True))
 
     def add_card(self, card: Card):
         self.__set.append(card)

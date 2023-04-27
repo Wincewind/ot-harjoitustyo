@@ -8,6 +8,8 @@ from ui.eventqueue import EventQueue
 from ui.renderer import Renderer
 from ui.gamesprites import GameSprites
 from ui.text.game_interface import GameInterface
+from ui.save_selection import SaveSelection
+from ui.deck_creation import DeckCreation
 
 # def third_week_demo():
 #     c_set = CardSet()
@@ -68,8 +70,32 @@ def fifth_week_demo():
     game_loop = gameloop.GameLoop(renderer, game_sprites, event_queue)
     game_loop.start()
 
+def sixth_week_demo():
+    display = pygame.display.set_mode(
+            (config.BOARD_WIDTH, config.BOARD_HEIGHT))
+    event_queue = EventQueue()
+    save_screen = SaveSelection(display,event_queue)
+    pl_data = save_screen.main_loop()
+    if pl_data is not None:
+        deck_creation = DeckCreation(display,event_queue,pl_data)
+        player = deck_creation.main_loop()
+        if player is not None:
+            player.deck.shuffle()
+            player.deal_a_hand()
+            c_set = CardSet()
+            c_set.create_basic_set()
+            deck = Deck(c_set)
+            opponent = Player(deck)
+            opponent.deck.shuffle()
+            opponent.deal_a_hand()
+            game_sprites = GameSprites(display, player, opponent)
+            renderer = Renderer(display, game_sprites)
+            game_loop = gameloop.GameLoop(renderer, game_sprites, event_queue)
+            game_loop.start()
+
 
 if __name__ == "__main__":
     # third_week_demo()
     # fourth_week_demo()
     fifth_week_demo()
+    #sixth_week_demo()

@@ -1,4 +1,16 @@
+import os
 import pygame
+from dotenv import load_dotenv
+
+dirname = os.path.dirname(__file__)
+
+try:
+    load_dotenv(dotenv_path=os.path.join(dirname, "..", ".env"))
+except FileNotFoundError:
+    pass
+
+_db_filename = os.getenv("DATABASE_FILENAME") or 'player_data.sqlite'
+PATH_TO_PLAYER_DATA = os.path.join(dirname, "..", "data", _db_filename)
 
 pygame.init()
 CARD_WIDTH = 100
@@ -7,9 +19,8 @@ OVERLAY_GREEN = (50, 168, 82, 128)
 OVERLAY_RED = (196, 65, 93, 128)
 OVERLAY_YELLOW = (255, 226, 99, 128)
 
-
-BOARD_WIDTH = 1600
-BOARD_HEIGHT = 1000
+BOARD_WIDTH = int(os.getenv("BOARD_WIDTH")) or 1600
+BOARD_HEIGHT = int(os.getenv("BOARD_HEIGHT")) or 1000
 BOARD_COLOR = (53, 101, 77)
 CARAVAN_BASE_COLOR = (202, 154, 178)
 
@@ -42,3 +53,6 @@ for i in range(3):
 
 FONT = pygame.font.SysFont("Copperplate Gothic", 24)
 BIG_FONT = pygame.font.SysFont("Copperplate Gothic", 64)
+
+
+AVAILABLE_CARDSETS = ['sylly', 'minime453']
