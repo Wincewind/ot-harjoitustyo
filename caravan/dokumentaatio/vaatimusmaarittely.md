@@ -9,7 +9,7 @@ Caravan on kahden pelaajan pelattava korttipeli, jota pelataan tavallisilla 52 k
 
 - [x] Mahdollisimman aikaisen pelin pelaamisen mahdollistamiseksi, aloitetaan kehittämällä tekstipohjainen käyttöliittymä kaksinpelinä.
 
-- [ ] Peliin voi luoda käyttäjätiedot, joiden valinta ja luonti näkymä aukeaisi ensin. Tämän jälkeen valitaan/kootaan pakka ja valitaan pelin aloitus.
+- [x] Peliin voi luoda käyttäjätiedot, joiden valinta ja luonti näkymä aukeaisi ensin. Tämän jälkeen valitaan/kootaan pakka ja valitaan pelin aloitus.
 
 - [x] Alla kuvankaappaus Fallout New Vegas:in pelikentästä sekä omasta toteutetusta versiosta:
 
@@ -21,10 +21,10 @@ New Vegas             |  Oma pygame versio
 
 ### Käyttäjätiedot ja pelipakan kokoaminen
 
-- [ ] Käyttäjätietojen valinta ikkunasta valitaan joko olemassa oleva nimi tai kirjoitetaan tekstikenttään uusi nimi ja valitaan "Create". 
+- [x] Käyttäjätietojen valinta ikkunasta valitaan joko olemassa oleva nimi tai kirjoitetaan tekstikenttään uusi nimi ja valitaan "Create". 
 - [ ] Oleellinen osa peliä, on pakan kasaaminen.
   - [ ] Tähän liittyy myös korttien kerääminen, mutta tämä on parempi jättää alustavasti jatkokehitysideaksi.
-- [ ] Oletus-pakka vaihtoehto.
+- [x] Oletus-pakka vaihtoehto.
 - [ ] Mahdollisuus koota pakka satunnaisista saatavilla olevista korteista. 
 
 ### Pelaajat
