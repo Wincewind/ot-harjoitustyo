@@ -82,12 +82,8 @@ def sixth_week_demo():
         deck_creation = DeckCreation(display, event_queue, pl_data)
         player = deck_creation.main_loop()
         if player is not None:
-            player.deck.shuffle()
-            player.deal_a_hand()
             opponent_data = PlayerData('Opponent',0,0,-1,[CardSet.sets[0]])
             opponent = opponent_data.prepare_player(CardSet.sets[0])
-            opponent.deck.shuffle()
-            opponent.deal_a_hand()
             game_sprites = GameSprites(display, player, opponent)
             renderer = Renderer(display, game_sprites)
             game_loop = gameloop.GameLoop(

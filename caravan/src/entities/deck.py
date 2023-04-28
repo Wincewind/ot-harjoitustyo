@@ -3,6 +3,11 @@ from entities.cardset import CardSet
 
 
 class Deck:
+    """Class representing a deck of playing cards.
+
+    Attributes:
+        cards: list of the cards currently in the deck.
+    """
     def __init__(self, cardset: CardSet) -> None:
         self.cards = []
         if len(cardset) < 30:
@@ -13,19 +18,25 @@ class Deck:
         self.cards = cardset.get_cards()
 
     def shuffle(self):
+        """Shuffles the deck using random.shuffle function.
+        """
         shuffle(self.cards)
 
     def deal_cards(self, amount: int):
+        """Deal a given amount of cards from the deck.
+
+        Args:
+            amount (int): Amount of cards to deal. 
+            If the amount exceeds the remaining cards, 
+            only the available amount of cards are returned. 
+            If the deck is empty, an empty list is returned.
+
+        Returns:
+            list: List of card objects.
+        """
         new_cards = []
         while amount > 0 < len(self.cards):
             new_cards.append(self.cards.pop())
             amount -= 1
         return new_cards
 
-# if __name__=='__main__':
-#     cardset = CardSet()
-#     cardset.create_set_from_all_cards()
-#     deck = Deck(cardset)
-#     deck.shuffle()
-#     print(deck.cards[0])
-#     print(cardset.get_cards()[0])

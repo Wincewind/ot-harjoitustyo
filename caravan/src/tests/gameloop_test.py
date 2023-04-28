@@ -26,6 +26,8 @@ class StubEventQueue:
 
 
 class StubRenderer:
+    def __init__(self) -> None:
+        self.winner = 0
     def render(self):
         pass
 

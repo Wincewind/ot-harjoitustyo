@@ -31,7 +31,7 @@ Pelin tietomallit muodostuvat luokat [Player](https://github.com/Wincewind/ot-ha
           cards
           started
           value
-          order_decending
+          order_descending
       }
 ```
 

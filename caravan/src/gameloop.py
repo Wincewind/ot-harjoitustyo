@@ -21,7 +21,7 @@ class GameLoop:
     def start(self):
         while True:
             if self._handle_events() is False:
-                if self.pl_name is not None:
+                if self.pl_name is not None and self._renderer.winner == 0:
                     player_data_repository.increment_player_losses(
                         self.pl_name)
                 break
@@ -44,7 +44,7 @@ class GameLoop:
                 elif self._states[0] == 'caravan_placement':
                     self.handle_caravan_selection_event(event)
 
-            if self._states[0] == 'game_over':
+            if self._states[0] == 'game_over' and self._renderer.winner == 0:
                 winner = 1
                 if rules.is_player_winner(self._game_sprites.player,
                                           self._game_sprites.opponent) is False:

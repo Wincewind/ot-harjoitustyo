@@ -3,6 +3,12 @@ from config import AVAILABLE_CARDSETS
 
 
 class CardSet:
+    """Class representing a set of cards, used to 
+    build a collection of card objects to be then used in a deck.
+
+    Attributes:
+        __set: A list into which a collection of cards is built.
+    """
     sets = AVAILABLE_CARDSETS
     values = range(1, 14)
     suits = ['Spades', 'Clubs', 'Diamonds', 'Hearts']
@@ -11,6 +17,8 @@ class CardSet:
         self.__set = []
 
     def create_set_from_all_cards(self):
+        """Creates a set from all available sets of cards.
+        """
         self.__set = []
         for c_set in CardSet.sets:
             for suit in CardSet.suits:
@@ -23,6 +31,12 @@ class CardSet:
             self.__set.append(Card(c_set, 'Red Joker', 0, True))
 
     def create_basic_set(self, set_name=sets[0]):
+        """Creates a set of cards using only one set.
+
+        Args:
+            set_name (str, optional): set name to be used in the set creation.
+            The first available set from configurations is used if none is given.
+        """
         self.__set = []
         for suit in CardSet.suits:
             for value in CardSet.values:
@@ -34,6 +48,11 @@ class CardSet:
         self.__set.append(Card(set_name, 'Red Joker', 0, True))
 
     def add_card(self, card: Card):
+        """Add a single card object into the set.
+
+        Args:
+            card (Card): a card object.
+        """
         self.__set.append(card)
 
     def __str__(self) -> str:
@@ -43,9 +62,9 @@ class CardSet:
         return len(self.__set)
 
     def get_cards(self):
-        return self.__set.copy()
+        """Get the created set of cards as a list.
 
-# if __name__=='__main__':
-#     c_set = CardSet()
-#     set.create_set_from_all_cards()
-#     print(set)
+        Returns:
+            list: List of the cards objects used in set creation.
+        """
+        return self.__set.copy()

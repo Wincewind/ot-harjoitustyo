@@ -53,7 +53,7 @@ def putting_card_into_opponent_caravan(opponent, move):
 
 def using_number_card(move):
     caravan, idx, card = move
-    c_ord_desc = caravan.order_decending
+    c_ord_desc = caravan.order_descending
     legal_move = True
     if idx <= len(caravan.cards)-1 and idx != -1:
         legal_move = False
