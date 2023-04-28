@@ -1,6 +1,6 @@
-import sqlite3
 from db_connection import get_database_connection
 from config import AVAILABLE_CARDSETS
+
 
 def drop_tables(connection):
     cursor = connection.cursor()
@@ -15,6 +15,7 @@ def drop_tables(connection):
     """)
 
     connection.commit()
+
 
 def create_tables(connection):
     cursor = connection.cursor()
@@ -45,8 +46,9 @@ def create_tables(connection):
             insert into CardSets
             (name) values
             (?);
-        """,(card_set,))
+        """, (card_set,))
     connection.commit()
+
 
 def init_db():
     connection = get_database_connection()
@@ -54,6 +56,5 @@ def init_db():
     create_tables(connection)
 
 
-if __name__=='__main__':
-    #drop_tables(get_database_connection())
+if __name__ == '__main__':
     init_db()

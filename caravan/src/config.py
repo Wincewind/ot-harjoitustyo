@@ -52,6 +52,7 @@ for i in range(3):
 
 
 FONT = pygame.font.SysFont("Copperplate Gothic", 24)
+MED_FONT = pygame.font.SysFont("Copperplate Gothic", 48)
 BIG_FONT = pygame.font.SysFont("Copperplate Gothic", 64)
 
 

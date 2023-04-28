@@ -22,7 +22,7 @@ class CardSet:
             self.__set.append(Card(c_set, 'Black Joker', 0, True))
             self.__set.append(Card(c_set, 'Red Joker', 0, True))
 
-    def create_basic_set(self,set_name=sets[0]):
+    def create_basic_set(self, set_name=sets[0]):
         self.__set = []
         for suit in CardSet.suits:
             for value in CardSet.values:

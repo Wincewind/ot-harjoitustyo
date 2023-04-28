@@ -4,6 +4,7 @@ from repositories.player_data_repository import player_data_repository, DataNotF
 from ui.eventqueue import EventQueue
 from entities.player_data import PlayerData
 
+
 class DeckCreation:
     def __init__(self, display, event_queue, player_data: PlayerData):
         pygame.display.set_caption("Deck Selection")
@@ -13,37 +14,41 @@ class DeckCreation:
         self.pl_data = player_data
         self._available_sets = player_data.card_sets+['All']
         self._user_selection = None
-        self._set_rects_info = [0,0,0]
+        self._set_rects_info = [0, 0, 0]
         self._update_set_selection_rects()
         self.draw_screen()
 
     def _update_set_selection_rects(self):
         font_color = (0, 0, 0)
-        text = config.BIG_FONT.render('Select a set to create your deck from:', True, font_color)
+        text = config.BIG_FONT.render(
+            'Select a set to create your deck from:', True, font_color)
         text_y = 100
         text_x = config.BOARD_WIDTH/2-text.get_width()/2
         rect = pygame.Rect(text_x-50, text_y-50,
-                            text.get_width()+100, text.get_height()+100)
-        self._draw_rect_and_text(config.BOARD_COLOR,rect,text,(text_x,text_y))
+                           text.get_width()+100, text.get_height()+100)
+        self._draw_rect_and_text(
+            config.BOARD_COLOR, rect, text, (text_x, text_y))
         text_y += 200
         for i in range(3):
             txt = self._available_sets[i]
             text = config.BIG_FONT.render(txt, True, font_color)
             text_x = config.BOARD_WIDTH/2-text.get_width()/2
             rect = pygame.Rect(text_x-50, text_y-50,
-                            text.get_width()+100, text.get_height()+100)
+                               text.get_width()+100, text.get_height()+100)
             rect_col = (192, 192, 192)
             if i == self._user_selection:
-                rect_col = (config.OVERLAY_YELLOW[0],config.OVERLAY_YELLOW[1],config.OVERLAY_YELLOW[2])
-            info = {'text':text,'text_xy':(text_x,text_y),'rect_col':rect_col,'rect':rect}
+                rect_col = (
+                    config.OVERLAY_YELLOW[0], config.OVERLAY_YELLOW[1], config.OVERLAY_YELLOW[2])
+            info = {'text': text, 'text_xy': (
+                text_x, text_y), 'rect_col': rect_col, 'rect': rect}
             self._set_rects_info[i] = info
             text_y += 200
-    
-    def _draw_rect_and_text(self,rect_col,rect,text,text_xy):
+
+    def _draw_rect_and_text(self, rect_col, rect, text, text_xy):
         pygame.draw.rect(self._display,
-                            rect_col,
-                            rect,
-                            border_radius=3)
+                         rect_col,
+                         rect,
+                         border_radius=3)
         self._display.blit(text, text_xy)
 
     def draw_screen(self):

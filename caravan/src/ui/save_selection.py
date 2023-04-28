@@ -1,19 +1,44 @@
 import pygame
 import config
-from repositories.player_data_repository import player_data_repository, DataNotFoundException
-from ui.eventqueue import EventQueue
+from repositories.player_data_repository import player_data_repository
+
 
 class SaveSelection:
     def __init__(self, display, event_queue):
         pygame.display.set_caption("Save Selection")
         self._display = display
         self._event_queue = event_queue
+        self._existing_saves = None
+        self._init_existing_saves()
         self._existing_saves = player_data_repository.find_all_player_names()
         self._user_selection = None
-        self.save_slot_information = [0,0,0]
+        self._user_action = None
+        self.save_slot_information = [0, 0, 0]
+        self.select_delete_rects = [0, 0]
         self._update_save_slot_rects()
+        self._update_select_and_delete_rects()
 
-    def _update_save_slot_rects(self,user_input=None):
+    def _init_existing_saves(self):
+        self._existing_saves = player_data_repository.find_all_player_names()
+
+    def _update_select_and_delete_rects(self):
+        for i, action in enumerate([
+            {'text': 'Select', 'text_x': 100},
+                {'text': 'Delete', 'text_x': config.BOARD_WIDTH-200}]):
+            font_color = (0, 0, 0)
+            text = config.MED_FONT.render(action['text'], True, font_color)
+            text_y = config.BOARD_HEIGHT-200
+            text_x = action['text_x']
+            rect = pygame.Rect(text_x-50, text_y-50,
+                               text.get_width()+100, text.get_height()+100)
+            rect_col = (192, 192, 192)
+            if action['text'] == self._user_action:
+                rect_col = (
+                    config.OVERLAY_YELLOW[0], config.OVERLAY_YELLOW[1], config.OVERLAY_YELLOW[2])
+            self.select_delete_rects[i] = {'action': action['text'], 'text': text, 'text_xy': (text_x, text_y),
+                                           'rect_col': rect_col, 'rect': rect}
+
+    def _update_save_slot_rects(self, user_input=None):
         font_color = (0, 0, 0)
         text = config.BIG_FONT.render('Create a new save', True, font_color)
         text_y = config.BOARD_HEIGHT/3-text.get_height()
@@ -23,26 +48,42 @@ class SaveSelection:
             elif i not in self._existing_saves:
                 msg = 'Create a new save'
             else:
-                msg = self._existing_saves[i]
+                msg = self._existing_saves[i]['name']
+                msg += f" - W: {self._existing_saves[i]['wins']} L: {self._existing_saves[i]['losses']}"
             text = config.BIG_FONT.render(msg, True, font_color)
             text_x = config.BOARD_WIDTH/2-text.get_width()/2
             rect = pygame.Rect(text_x-50, text_y-50,
-                            text.get_width()+100, text.get_height()+100)
+                               text.get_width()+100, text.get_height()+100)
             rect_col = (192, 192, 192)
             if i == self._user_selection:
-                rect_col = (config.OVERLAY_YELLOW[0],config.OVERLAY_YELLOW[1],config.OVERLAY_YELLOW[2])
-            info = {'text':text,'text_xy':(text_x,text_y),'rect_col':rect_col,'rect':rect}
+                rect_col = (
+                    config.OVERLAY_YELLOW[0], config.OVERLAY_YELLOW[1], config.OVERLAY_YELLOW[2])
+            info = {'text': text, 'text_xy': (
+                text_x, text_y), 'rect_col': rect_col, 'rect': rect}
             self.save_slot_information[i] = info
             text_y += 200
-    
+
+    def _draw_rect_and_text(self, rect_col, rect, text, text_xy):
+        pygame.draw.rect(self._display,
+                         rect_col,
+                         rect,
+                         border_radius=3)
+        self._display.blit(text, text_xy)
+
     def draw_screen(self):
         self._display.fill(config.BOARD_COLOR)
         for i in range(3):
-            pygame.draw.rect(self._display,
-                            self.save_slot_information[i]['rect_col'],
-                            self.save_slot_information[i]['rect'],
-                            border_radius=3)
-            self._display.blit(self.save_slot_information[i]['text'], self.save_slot_information[i]['text_xy'])
+            self._draw_rect_and_text(
+                self.save_slot_information[i]['rect_col'],
+                self.save_slot_information[i]['rect'],
+                self.save_slot_information[i]['text'],
+                self.save_slot_information[i]['text_xy'])
+        for i in range(2):
+            self._draw_rect_and_text(
+                self.select_delete_rects[i]['rect_col'],
+                self.select_delete_rects[i]['rect'],
+                self.select_delete_rects[i]['text'],
+                self.select_delete_rects[i]['text_xy'])
         pygame.display.update()
 
     def get_user_input(self):
@@ -59,13 +100,49 @@ class SaveSelection:
                     if event.key == pygame.K_BACKSPACE:
                         user_input = user_input[:-1]
                     elif event.key == pygame.K_RETURN:
-                        player_data_repository.create_player_data(user_input,self._user_selection)
-                        self._existing_saves[self._user_selection] = user_input
+                        player_data_repository.create_player_data(
+                            user_input, self._user_selection)
+                        self._init_existing_saves()
                         return True
                     else:
                         user_input += event.unicode
                     self._update_save_slot_rects(user_input)
                     self.draw_screen()
+
+    def reset_save_selection(self):
+        self._save_selected = False
+        self._user_selection = None
+        self._user_action = None
+        self._update_select_and_delete_rects()
+        self._init_existing_saves()
+
+    def check_for_action(self):
+        while True:
+            self._user_action = None
+            for i, info in enumerate(self.select_delete_rects):
+                if info['rect'].collidepoint(pygame.mouse.get_pos()):
+                    self._user_action = info['action']
+                    break
+
+            for event in self._event_queue.get():
+                if event.type == pygame.QUIT:
+                    return False
+
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    self.reset_save_selection()
+                    return None
+
+                if event.type == pygame.MOUSEBUTTONDOWN and self._user_action is not None:
+                    if self._user_action == 'Select':
+                        return True
+                    if self._user_action == 'Delete':
+                        player_data_repository.delete_player_data(
+                            self._existing_saves[self._user_selection]['name'])
+                        self.reset_save_selection()
+                        return None
+
+            self._update_select_and_delete_rects()
+            self.draw_screen()
 
     def main_loop(self):
         while True:
@@ -76,13 +153,16 @@ class SaveSelection:
                         self._user_selection = i
                         break
                 self._update_save_slot_rects()
-                
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if self._user_selection in self._existing_saves:
+
+                if event.type == pygame.MOUSEBUTTONDOWN and self._user_selection in self._existing_saves:
+                    result = self.check_for_action()
+                    if result is False:
+                        return None
+                    if result is True:
                         return player_data_repository.find_player_data(
-                            self._existing_saves[self._user_selection])
-                    if not self.get_user_input():
-                        event.type = pygame.QUIT
+                            self._existing_saves[self._user_selection]['name'])
+                elif event.type == pygame.MOUSEBUTTONDOWN and self._user_selection is not None and not self.get_user_input():
+                    return None
 
                 if event.type == pygame.QUIT:
                     return None

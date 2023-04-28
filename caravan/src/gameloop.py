@@ -4,20 +4,26 @@ import actions
 from ui.eventqueue import EventQueue
 from ui.renderer import Renderer
 from ui.gamesprites import GameSprites
+from repositories.player_data_repository import player_data_repository
 
 
 class GameLoop:
-    def __init__(self, renderer: Renderer, game_sprites: GameSprites, event_queue: EventQueue):
+    def __init__(self, renderer: Renderer, game_sprites: GameSprites,
+                 event_queue: EventQueue, name: str = None):
         pygame.display.set_caption("Caravan")
         self._renderer = renderer
         self._game_sprites = game_sprites
         self._event_queue = event_queue
         self._states = ['turn_change', 'hand_selection', 'caravan_placement']
         self._player_turn = True
+        self.pl_name = name
 
     def start(self):
         while True:
             if self._handle_events() is False:
+                if self.pl_name is not None:
+                    player_data_repository.increment_player_losses(
+                        self.pl_name)
                 break
 
             self._render()
@@ -43,6 +49,15 @@ class GameLoop:
                 if rules.is_player_winner(self._game_sprites.player,
                                           self._game_sprites.opponent) is False:
                     winner = 2
+
+                if self.pl_name is not None:
+                    if winner == 2:
+                        player_data_repository.increment_player_losses(
+                            self.pl_name)
+                    else:
+                        player_data_repository.increment_player_wins(
+                            self.pl_name)
+
                 self._renderer.winner = winner
 
             if event.type == pygame.QUIT:

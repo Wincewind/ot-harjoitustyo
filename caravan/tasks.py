@@ -29,3 +29,8 @@ def coverage(ctx):
 @task(coverage)
 def coverage_report(ctx):
     ctx.run("coverage html", pty=True)
+
+
+@task
+def build(ctx):
+    ctx.run("python3 src/init_db.py", pty=True)

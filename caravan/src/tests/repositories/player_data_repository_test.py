@@ -7,29 +7,51 @@ from entities.player_data import PlayerData
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
         init_db()
-        player_data_repository.create_player_data('Teppo Tulppu',1)
-        player_data_repository.create_player_data('Roope Ankka',2)
-        player_data_repository.create_player_data('Pelle Peloton',3)
+        player_data_repository.create_player_data('Teppo Tulppu', 1)
+        player_data_repository.create_player_data('Roope Ankka', 2)
+        player_data_repository.create_player_data('Pelle Peloton', 3)
 
     def test_create_player_data(self):
         try:
             pl_data = player_data_repository.find_player_data('Aku Ankka')
         except DataNotFoundException as ex:
-            self.assertEqual(str(ex), 'No data found for player name "Aku Ankka"')
-        player_data_repository.create_player_data('Aku Ankka',0)
+            self.assertEqual(
+                str(ex), 'No data found for player name "Aku Ankka"')
+        player_data_repository.create_player_data('Aku Ankka', 0)
         pl_data = player_data_repository.find_player_data('Aku Ankka')
 
         self.assertEqual(pl_data.name, 'Aku Ankka')
-        self.assertEqual((pl_data.wins,pl_data.losses,pl_data._row_number), (0,0,0))
+        self.assertEqual((pl_data.wins, pl_data.losses,
+                         pl_data._row_number), (0, 0, 0))
 
     def test_find_all_names(self):
-        self.assertEqual(set(player_data_repository.find_all_player_names().keys()),{1,2,3})
+        self.assertEqual(
+            set(player_data_repository.find_all_player_names().keys()), {1, 2, 3})
         init_db()
-        self.assertEqual(player_data_repository.find_all_player_names(),{})
+        self.assertEqual(player_data_repository.find_all_player_names(), {})
 
     def test_delete_player_data(self):
         player_data_repository.delete_player_data('Teppo Tulppu')
-        self.assertEqual(set(player_data_repository.find_all_player_names().values()),{'Roope Ankka','Pelle Peloton'})
+        self.assertEqual({pd['name'] for pd in player_data_repository.find_all_player_names(
+        ).values()}, {'Roope Ankka', 'Pelle Peloton'})
+
+    def test_increment_wins(self):
+        self.assertEqual(player_data_repository.find_player_data(
+            'Teppo Tulppu').wins, 0)
+        player_data_repository.increment_player_wins('Teppo Tulppu')
+        player_data_repository.increment_player_wins('Teppo Tulppu')
+        player_data_repository.increment_player_wins('Teppo Tulppu')
+        self.assertEqual(player_data_repository.find_player_data(
+            'Teppo Tulppu').wins, 3)
+
+    def test_increment_losses(self):
+        self.assertEqual(player_data_repository.find_player_data(
+            'Teppo Tulppu').losses, 0)
+        player_data_repository.increment_player_losses('Teppo Tulppu')
+        player_data_repository.increment_player_losses('Teppo Tulppu')
+        player_data_repository.increment_player_losses('Teppo Tulppu')
+        self.assertEqual(player_data_repository.find_player_data(
+            'Teppo Tulppu').losses, 3)
 
     #     self.assertEqual(len(users), 2)
     #     self.assertEqual(users[0].username, self.user_kalle.username)
