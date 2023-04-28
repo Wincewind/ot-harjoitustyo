@@ -22,6 +22,6 @@
 | 23.4. | 1    | Päivitetty dokumentaatiota |
 | 26.4. | 3.5    | Aloitettu pelaaja datan luomis/hallinnointi toiminnallisuuden toteuttamista |
 | 27.4. | 6.5    | Jatkettu pelaaja datan hallinnointi toiminnallisuuden, sen testien ja käyttöliittymän kehitystä  |
-| 28.4. | 2    | Viimeistelty pelaaja datan valintaa ja lisätty sen poistamiselle painike |
+| 28.4. | 4    | Viimeistelty pelaaja datan valintaa ja lisätty sen poistamiselle painike. Lisätty voittojen ja häviöiden kasvatus toiminnallisuus ja nämä pelaaja datan valintaan |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 64.5   | | 
+| yht   | 66.5   | | 
