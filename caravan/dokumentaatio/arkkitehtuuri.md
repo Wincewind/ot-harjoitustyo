@@ -51,21 +51,52 @@ Yhden pelaaja-olion alustaminen tapahtuu seuraavasti:
 ```mermaid
 sequenceDiagram
   actor main
+  participant player_data
   participant c_set
   participant Card
   participant deck
   participant player
-  main->>c_set: CardSet()
-  main->>c_set: create_basic_set()
+  main->>player_data: PlayerData(name,wins,losses,row_number,[cardset_names])
+  main->>player_data: prepare_player(set_name)
+  activate player_data
+  player_data->>c_set: CardSet()
+  player_data->>player_data: set_name.lower() == 'all'
+  player_data->>c_set: create_basic_set(set_name)
   activate c_set
   loop for suit in CardSet.suits, for value in CardSet.values
-  c_set ->> Card: Card(set, suit, value, special)
+  c_set ->> Card: Card(set_name, suit, value, special)
   end
   deactivate c_set
-  main->>deck: Deck(c_set)
+  player_data->>deck: Deck(c_set)
   deck->>deck: len(c_set) > 29
   deck->>c_set: get_cards()
   c_set-->>deck: __set.copy()
-  main->>player: Player(deck)
+  player_data->>player: Player(deck)
   player->>caravans: (Caravan(), Caravan(), Caravan())
+  player_data->>deck: player.deck.shuffle()
+  activate deck
+  deck->>deck: shuffle(self.cards)
+  deactivate deck
+  player_data->>player: deal_a_hand()
+  activate player
+  player->>deck: deal_cards(8)
+  activate deck
+  loop while 8 > 0 < len(cards)
+  deck->>deck: new_cards.append(card), 8 -= 1
+  end
+  deck->>player: new_cards
+  deactivate deck
+  deactivate player
+  player_data->>main: player
+  deactivate player_data
 ```
+
+
+## Käyttöliittymä
+
+Käyttöliittymä muodostuu tällä hetkellä kolmesta näkymästä:
+1. Pelaaja datan valinta/luonti/poistaminen
+2. Korttisarjan valinta (Card set) ja näistä pakan muodostaminen
+3. Pelinäyttö
+
+Näkymät on toteutettu omissa luokissaan ja niitä kutsutaan main-moduliista.
