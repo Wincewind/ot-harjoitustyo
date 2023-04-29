@@ -60,7 +60,7 @@ sequenceDiagram
   main->>player_data: prepare_player(set_name)
   activate player_data
   player_data->>c_set: CardSet()
-  player_data->>player_data: set_name.lower() == 'all'
+  player_data->>player_data: set_name.lower() != 'all'
   player_data->>c_set: create_basic_set(set_name)
   activate c_set
   loop for suit in CardSet.suits, for value in CardSet.values
