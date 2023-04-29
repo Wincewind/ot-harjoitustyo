@@ -11,10 +11,15 @@ Caravan on kahden pelaajan pelattava korttipeli, jota pelataan tavallisilla 52 k
 
 ## Asennus
 
-Kun repo on kloonattu haluamaasi hakemistoon, siirry [caravan](caravan/)-alihakemistoon ja asenna riippuvuudet komennolla:
+1. Kun repo on kloonattu haluamaasi hakemistoon, siirry [caravan](caravan/)-alihakemistoon ja asenna riippuvuudet komennolla:
 
 ```bash
 poetry install
+```
+2. Alusta pelaaja datan talletukseen käytettävä db tiedosto komennolla:
+
+```bash
+poetry run invoke build
 ```
 
 ## Komentorivitoiminnot
