@@ -1,3 +1,5 @@
+"""Module for functions that check for the Caravan card game rules and 
+effects of special cards given the current state of players' caravans."""
 from entities.player import Player
 
 CARAVAN_MIN = 21
@@ -5,10 +7,29 @@ CARAVAN_MAX = 26
 
 
 def check_if_caravan_ready(car_val: int):
+    """Check if caravan is ready to be sold.
+
+    Args:
+        car_val (int): The total value of a caravan's cards.
+
+    Returns:
+        bool: True if car_val is within range 21-26, else False.
+    """
     return CARAVAN_MIN <= car_val <= CARAVAN_MAX
 
 
 def check_if_caravan_sold(car_val: int, opposing_car_val: int):
+    """Check if your caravan is ready and higher value than the opposing caravan.
+
+    Args:
+        car_val (int): Your caravan's value.
+
+        opposing_car_val (int): Opponent's opposing caravan's value.
+
+    Returns:
+        bool: True if car_val is ready to be sold and higher in value than a ready opposing_car_val. 
+        Else False.
+    """
     if check_if_caravan_ready(car_val):
         if not check_if_caravan_ready(opposing_car_val):
             return True
@@ -18,6 +39,23 @@ def check_if_caravan_sold(car_val: int, opposing_car_val: int):
 
 
 def check_if_legal_move(player: Player, opponent: Player, move: tuple):
+    """General function to check if a action to be performed is legal according to the game rules.
+
+    Args:
+        player (Player): represents the one performing the action.
+
+        opponent (Player): represents the opposing player during the action.
+
+        move (tuple): tuple of (caravan,index,card): Caravan into 
+        which the card object is being placed, 
+        index at which the card is being placed at in the caravan. 
+        The card object that's being placed.
+
+    Returns:
+        tuple(bool,str): A tuple of bool and str. False if 
+        the move was illegal and a message explaining why. 
+        True if the move is legal and an empty string.
+    """
     _, _, card = move
     if not all_own_caravans_started_or_card_going_to_own_unstarted_caravan(player, move):
         return (False, 'You need to start all your caravans before placing cards elsewhere. ' +
@@ -33,6 +71,17 @@ def check_if_legal_move(player: Player, opponent: Player, move: tuple):
 
 
 def all_own_caravans_started_or_card_going_to_own_unstarted_caravan(player, move) -> bool:
+    """Check for caravan started statuses.
+
+    Args:
+        player (PLayer): Player object represents the one performing the action.
+        move (tuple): tuple of (caravan,index,card), see 
+        check_if_legal_move for more thorough description.
+
+    Returns:
+        bool: True if all caravans started or the card used is a number card on a 
+        caravan that isn't started and the player owns. Else False.
+    """
     caravan, _, card = move
     if not all(c.started for c in player.caravans):
         if caravan not in player.caravans:
@@ -45,6 +94,8 @@ def all_own_caravans_started_or_card_going_to_own_unstarted_caravan(player, move
 
 
 def putting_card_into_opponent_caravan(opponent, move):
+    """Check if a card is being placed in opponent's caravan and if the card is suited for that.
+    """
     caravan, _, card = move
     if caravan in opponent.caravans and not card.special:
         return False
@@ -52,6 +103,8 @@ def putting_card_into_opponent_caravan(opponent, move):
 
 
 def using_number_card(move):
+    """Check if the action performed is legal for a number card.
+    """
     caravan, idx, card = move
     c_ord_desc = caravan.order_descending
     legal_move = True
@@ -65,7 +118,8 @@ def using_number_card(move):
             legal_move = False
         if legal_move and c_ord_desc is None:
             return legal_move
-        if caravan.cards[-1].value == 12:  # Queen determins the suit
+        # If Queen is the top most card in caravan, it determins the suit.
+        if caravan.cards[-1].value == 12:
             prev_suit = caravan.cards[-1].suit
         if legal_move and prev_suit == card.suit:
             return legal_move
@@ -77,6 +131,8 @@ def using_number_card(move):
 
 
 def using_special_card(move):
+    """Check if the action is legal for a special card (Jack, Queen, King, Joker).
+    """
     caravan, idx, card = move
     # Queen can only be placed on top of the caravan.
     if idx == len(caravan.cards):
@@ -95,6 +151,15 @@ def using_special_card(move):
 
 
 def get_cards_removed_by_jack(move):
+    """Get the cards that jack would remove from a caravan with the given action.
+
+    Args:
+        move (tuple): tuple of (caravan,index,card), see 
+        check_if_legal_move for more thorough description.
+
+    Returns:
+        list: A list of card objects that should be removed, if the action were to be performed.
+    """
     caravan, idx, _ = move
     cards_to_remove = []
     if idx == -1:
@@ -111,7 +176,7 @@ def _find_cards_to_remove(player, opponent, protected):
     remove_following_specials = False
     for crvn in player.caravans + opponent.caravans:
         for crd in crvn.cards:
-            if crd == protected:  # and crvn == caravan:
+            if crd == protected:
                 remove_following_specials = False
                 continue
             if not crd.special:
@@ -130,6 +195,19 @@ def _find_cards_to_remove(player, opponent, protected):
 
 
 def get_cards_removed_by_joker(player, opponent, move):
+    """Get the cards that joker would remove from a caravan with the given action.
+
+    Args:
+        player (Player): represents the one performing the action.
+
+        opponent (Player): represents the opposing player during the action.
+
+        move (tuple): tuple of (caravan,index,card), see 
+        check_if_legal_move for more thorough description.
+
+    Returns:
+        list: A list of card objects that should be removed, if the action were to be performed.
+    """
     caravan, idx, _ = move
     if idx == -1:
         idx = len(caravan.cards) - 1
@@ -142,6 +220,13 @@ def get_cards_removed_by_joker(player, opponent, move):
 
 
 def double_total_with_king(move):
+    """Find the next number card in the caravan and double its total.
+    This function is to be refactored into the actions module.
+
+    Args:
+        move (tuple): tuple of (caravan,index,card), 
+        see check_if_legal_move for more thorough description.
+    """
     caravan, idx, _ = move
     if idx == -1:
         idx = len(caravan.cards) - 1
@@ -152,6 +237,16 @@ def double_total_with_king(move):
 
 
 def is_player_winner(player, opponent):
+    """Check if the player or opponent has won.
+
+    Args:
+        player (Player): Player in turn when the check is performed.
+        opponent (Player): The opposing player when the check is performed.
+
+    Returns:
+        nullable bool: None if neither is a winner, 
+        True if the player is and False if it's the opponent.
+    """
     pcv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else
            -float('inf') for c in player.caravans]
     ocv = [c.value if CARAVAN_MIN <= c.value <= CARAVAN_MAX else
@@ -169,30 +264,3 @@ def is_player_winner(player, opponent):
     if winning_caravans > 0:
         return True
     return False
-
-# if __name__=='__main__':
-    # c_set = CardSet()
-    # c_set.create_set_from_all_cards()
-    # deck = Deck(c_set)
-    # player = Player(deck)
-    # deck = Deck(c_set)
-    # opponent = Player(deck)
-    # player.deck.shuffle()
-    # player.deal_a_hand()
-    # opponent.deck.shuffle()
-    # opponent.deal_a_hand()
-
-    # player.caravans[1].insert_card(-1, Card(None,'Spades',7,False))
-    # player.caravans[1].insert_card(-1, Card(None,'Diamonds',5,False))
-    # self.player.caravans[1].insert_card(-1, Card(None,'Hearts',12,True))
-    # # self.player.caravans[1].order_decending *= -1
-    # move = (player.caravans[0], -1, Card(None,'Hearts',9,False))
-    # # print(using_number_card(move))
-    # player.caravans[0].insert_card(-1,Card(None,'Hearts',2,False))
-    # player.caravans[0].insert_card(-1,Card(None,'Hearts',3,False))
-    # player.caravans[0].insert_card(-1,Card(None,'Hearts',12,True))
-    # player.caravans[0].insert_card(-1,Card(None,'Hearts',12,True))
-    # player.caravans[2].insert_card(-1,Card(None,'Hearts',2,False))
-    # opponent.caravans[1].insert_card(-1,Card(None,'Hearts',2,False))
-    # move = (player.caravans[0], -1, Card(None,'Spades',1,False))
-    # print(using_number_card(move))

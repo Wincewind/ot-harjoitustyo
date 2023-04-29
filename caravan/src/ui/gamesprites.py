@@ -7,6 +7,30 @@ from ui.sprites.card import CardSprite
 
 
 class GameSprites:
+    """Class representing the gamesprites to be controlled during the game. 
+    Things like: card positions, should the card front or backsides be shown, 
+    what overlay to use depending if a card is selected or placed into a legal or illegal position.
+
+    Attributes:
+        _display: pygame display on to which draw shapes, before the sprites can be rendered.
+        player: Player object representing the starting player with sprites 
+        rendered at the bottom side of the screen.
+        opponent: Player object representing the opposing player with sprites 
+        at the upper side of the screen. 
+        _player_turn: nullable bool value representing if it's the player's turn. 
+        If it's False, it's the opponent's turn and if it's None, it's neither's and the turn is changing.
+        player_sprites: pygame sprite group for the player's sprites.
+        opponent_sprites: pygame sprite group for the opponent's sprites.
+        caravan_sprites: pygame sprite group for all of the caravans.
+        all: pygame sprite group for all sprites.
+        _player_selection: int that represents the card selection in player's or opponent's hand.
+        _chosen_crd_sprite: A card sprite chosen to be placed in a caravan.
+        acting_player: Reference to either the player or opponent attribute, depending on whose turn it is.
+        opposing_player: Reference to either the player or opponent attribute, depending on whose turn it is.
+        pl_display_caravans: A copy of the player-attribute's caravan's 
+        in which the moving of the card can be done before placing it and check if the placement is legal.
+        op_display_caravans: Same as with pl_display_caravans but for the opponent-attribute.
+    """
     def __init__(self, display, player: Player, opponent: Player) -> None:
         self._display = display
         self.player = player
@@ -22,10 +46,13 @@ class GameSprites:
         self._initialize_sprites()
 
         self._reset_display_caravans()
-        self.caravan_sprites = pygame.sprite.Group()
 
     @property
     def player_turn(self):
+        """_player_turn attribute that controls the acting_player and opposing_player attributes. 
+        If this is set to True, player attribute is set as acting_player 
+        and opponent as opposing_player. If False, vice versa.
+        """
         return self._player_turn
 
     @player_turn.setter
@@ -41,6 +68,9 @@ class GameSprites:
 
     @property
     def player_selection(self):
+        """int that represents the card selection in acting_player's hand. 
+        When updated, the player_sprites and opponent_sprites are updated accordingly.
+        """
         return self._player_selection
 
     @player_selection.setter
@@ -69,6 +99,12 @@ class GameSprites:
         self.update_caravan_sprites()
 
     def select_card(self):
+        """Get the card sprite at current player_selection.
+
+        Returns:
+            CardSprite: CardSprite object from 
+            either the player_sprites or opponent_sprites depending on the player_turn.
+        """
         if self.player_turn:
             return self.player_sprites.sprites()[self.player_selection]
         return self.opponent_sprites.sprites()[self.player_selection]
@@ -79,6 +115,7 @@ class GameSprites:
         self.update_all_sprites()
 
     def update_all_sprites(self):
+        """Update all attribute with current player_sprites, opponent_sprites and caravan_sprites."""
         self.all = pygame.sprite.Group()
         self.all.add(
             self.player_sprites,
@@ -93,6 +130,10 @@ class GameSprites:
     #         pygame.display.fill(config.BOARD_COLOR,config.OPPONENT_AREA_RECT)
 
     def update_hand_sprites(self):
+        """Update the hand sprites of player and opponent. 
+        Depending whose turn it is, either CardSprite backs or fronts are shown and a 
+        overlay is added if the CardSprite in question is under player selection.
+        """
         if self._player_turn is None:
             cards_to_show = (False, False)
         elif self._player_turn:

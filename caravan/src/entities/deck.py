@@ -39,4 +39,3 @@ class Deck:
             new_cards.append(self.cards.pop())
             amount -= 1
         return new_cards
-
