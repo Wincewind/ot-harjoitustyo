@@ -25,5 +25,6 @@
 | 28.4. | 4    | Viimeistelty pelaaja datan valintaa ja lisätty sen poistamiselle painike. Lisätty voittojen ja häviöiden kasvatus toiminnallisuus ja nämä pelaaja datan valintaan |
 | 28.4. | 1.5    | Lisätty testejä, kommentoitu koodia |
 | 29.4. | 3    | Kommentoitu koodia, päivitetty dokumentaatiota |
+| 30.4. | 2    | Lisätty käyttöohje |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 71   | | 
+| yht   | 73   | | 
