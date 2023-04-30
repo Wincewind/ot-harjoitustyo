@@ -17,3 +17,8 @@
   - Ainoat puuttuvat toiminnallisuudet itse pelistä on korttien ja karavaanien poisto.
   - Main starttaa nyt tämän version pelistä.
 - Pelinkulkua ja näytön päivitystä suoritetaan uudella Gameloop luokalla ja kortti "sprite":jen sijoituksen, värin, yms. päivitystä tehdään GameSprites luokasta.
+
+## Viikko 6
+- Lisätty pelaajan datalle (nimi, voitot, häviöt, käytössä olevat korttisarjat) tietokanta ja toiminnallisuudet tämän käsittelyyn.
+- Lisätty käyttöliittymään tallennuspaikan valinta, jolla voidaan valita/luoda/poistaa pelaaja datoja.
+- Lisätty käyttöliittymään korttisarjan valinta (pelkistetty versio pakan muodostamisesta yksittäisistä korteista).
