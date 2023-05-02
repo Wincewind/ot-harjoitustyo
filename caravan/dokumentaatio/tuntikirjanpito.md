@@ -26,5 +26,6 @@
 | 28.4. | 1.5    | Lisätty testejä, kommentoitu koodia |
 | 29.4. | 3    | Kommentoitu koodia, päivitetty dokumentaatiota |
 | 30.4. | 2    | Lisätty käyttöohje |
+| 2.5. | 1.5    | Kommentoitu koodia |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 73   | | 
+| yht   | 74.5   | | 
