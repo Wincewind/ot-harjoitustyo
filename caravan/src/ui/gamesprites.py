@@ -81,6 +81,13 @@ class GameSprites:
 
     @property
     def chosen_crd_sprite(self):
+        """Set or get the a card sprite as the one selected 
+        from acting_player's hand. This card's sprite will 
+        then be placed in the acting_player's first "diplayed" caravan. 
+
+        Returns:
+            CardSprite: The selected CardSprite object.
+        """
         return self._chosen_crd_sprite
 
     @chosen_crd_sprite.setter
@@ -122,12 +129,6 @@ class GameSprites:
             self.opponent_sprites,
             self.caravan_sprites
         )
-
-    # def _clear_player_area(self):
-    #     if self.player_turn:
-    #         pygame.display.fill(config.BOARD_COLOR,config.PLAYER_AREA_RECT)
-    #     else:
-    #         pygame.display.fill(config.BOARD_COLOR,config.OPPONENT_AREA_RECT)
 
     def update_hand_sprites(self):
         """Update the hand sprites of player and opponent. 
@@ -181,6 +182,11 @@ class GameSprites:
             copy.copy(c) for c in self.opponent.caravans)
 
     def update_caravan_sprites(self):
+        """Update the pl and op display_caravan card sprites. To be executed each 
+        time the chosen_card is moved or if placement is done or canceled.
+        CardSprite overlay color is set based on if the chosen_card's current 
+        placement is legal or not. 
+        """
         self.caravan_sprites = pygame.sprite.Group()
         player = self.acting_player
         opponent = self.opposing_player
@@ -214,6 +220,16 @@ class GameSprites:
                     y = y + setup['caravan direction']*config.CARD_HEIGHT/3.5
 
     def _determine_caravan_font_color(self, car_val, opposing_car_val):
+        """Set used caravan font color based on their value. White if yet to be sold, 
+        yellow if sold and red if over limit. 
+
+        Args:
+            car_val (int): value of a caravan
+            opposing_car_val (int): value of the opposing caravan.
+
+        Returns:
+            tuple(int,int,int): RGB values of the font.
+        """
         font_color = (255, 255, 255)
         if rules.check_if_caravan_sold(car_val, opposing_car_val):
             font_color = (255, 226, 99)
@@ -222,6 +238,9 @@ class GameSprites:
         return font_color
 
     def clear_caravan_area(self):
+        """Clear the game board center area of drawn CardSprites. 
+        Write current values of caravans' on the side of the placement areas. 
+        """
         self._display.fill(config.BOARD_COLOR, config.CARAVAN_AREA_RECT)
         caravan_base_width = config.PLAYER_CARAVAN_BASE_RECTS[0][2]
         for i in range(3):
@@ -258,6 +277,12 @@ class GameSprites:
                                             config.OPPONENT_CARAVAN_BASE_RECTS[i][1]))
 
     def move_card(self, movement):
+        """Move card in the pl and op display_caravans.
+
+        Args:
+            movement (tuple(int,int)): A tuple of index movement from caravan 
+            to another and placement within the cards of a caravan.
+        """
         caravan_idx, placement_idx = self.pos
         if caravan_idx in range(3):
             self.pl_display_caravans[caravan_idx].cards.remove(

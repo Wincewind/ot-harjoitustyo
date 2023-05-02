@@ -1,13 +1,24 @@
-from config import CARD_WIDTH, CARD_HEIGHT
-from entities.card import Card
 import os
 import sys
 import pygame
+from config import CARD_WIDTH, CARD_HEIGHT
+from entities.card import Card
 dirname = os.path.dirname(__file__)
 sys.path.append(os.path.join(dirname, "..", ".."))
 
 
 class CardSprite(pygame.sprite.Sprite):
+    """Class representing a card sprite.
+
+    Args:
+        pygame (sprite.Sprite): Inherits the pygame Sprite class.
+
+    Attributes:
+        card: Card object that will determine what the image loaded to the sprite will be.
+        rect: pygame.Rect object generated from the card image's surface.
+        __img_name: filename of the image.
+
+    """
     CARD_DIMENSIONS = (CARD_WIDTH, CARD_HEIGHT)
     OVERLAY_GREEN = (50, 168, 82, 128)
     OVERLAY_RED = (196, 65, 93, 128)
@@ -28,6 +39,8 @@ class CardSprite(pygame.sprite.Sprite):
         self.rect.y = y
 
     def load_img(self):
+        """Load the card's image from assets-directory. 
+        """
         self.image = pygame.image.load(
             os.path.join(dirname, "..", "..", "assets",
                          self.card.set, self.__img_name)
@@ -36,37 +49,14 @@ class CardSprite(pygame.sprite.Sprite):
             self.image, CardSprite.CARD_DIMENSIONS)
 
     def set_overlay(self, overlay_color=None):
+        """Set a overlay to the card sprite.
+
+        Args:
+            overlay_color (tuple(int,int,int,int), optional): The RGBA value of the overlay. 
+            Defaults to None and no color overlay is set.
+        """
         self.load_img()
         if overlay_color is not None:
             overlay = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
             overlay.fill(overlay_color)
             self.image.blit(overlay, (0, 0))
-
-
-# if __name__ == '__main__':
-#     crd = Card('minime453', 'Hearts', '13', True)
-#     crd_sprite = CardSprite(crd)
-#     pygame.init()
-#     screen_width = 800
-#     screen_height = 600
-#     screen = pygame.display.set_mode(crd_sprite.image.get_size())
-#     screen.blit(crd_sprite.image, crd_sprite.rect)
-#     running = True
-#     while running:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-#             if event.type == pygame.KEYDOWN:
-#                 if event.key == pygame.K_UP:
-#                     crd_sprite.set_overlay(CardSprite.OVERLAY_GREEN)
-#                 if event.key == pygame.K_DOWN:
-#                     crd_sprite.set_overlay(CardSprite.OVERLAY_RED)
-#                 if event.key == pygame.K_LEFT:
-#                     crd_sprite.set_overlay(CardSprite.OVERLAY_YELLOW)
-#                 if event.key == pygame.K_RIGHT:
-#                     crd_sprite.set_overlay()
-#                 screen.blit(crd_sprite.image, crd_sprite.rect)
-
-#         pygame.display.update()
-
-#     pygame.quit()

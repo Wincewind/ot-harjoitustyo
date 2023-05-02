@@ -1,7 +1,25 @@
+"""Module for the possible caravan game actions: playing a card, 
+discarding a caravan or a card.
+"""
 import rules
 
 
 def play_card(player, opponent, move):
+    """Place a card into a caravan.
+
+    Args:
+        player (Player): represents the one performing the action.
+        
+        opponent (Player): represents the opposing player during the action.
+        
+        move (tuple): tuple of (caravan,index,card): Caravan into 
+        which the card object is being placed, 
+        index at which the card is being placed at in the caravan. 
+        The card object that's being placed.
+
+    Returns:
+        bool: False if the placement was illegal, otherwise True.
+    """
     caravan = move[0]
     if not rules.check_if_legal_move(player, opponent, move)[0]:
         return False
@@ -18,7 +36,6 @@ def play_card(player, opponent, move):
         for card in cards_to_remove:
             next(c for c in player.caravans +
                  opponent.caravans if card in c.cards).cards.remove(card)
-            # caravan.cards.remove(card)
     if crd.value != 11:
         idx = move[1]
         if crd.value == 0:
@@ -28,6 +45,16 @@ def play_card(player, opponent, move):
 
 
 def discard_caravan(idx, player):
+    """Discard one of the player's caravans, if it had cards.
+
+    Args:
+        idx (int): Index of the caravan.
+
+        player (Player): Player object that has the caravans in its Player.caravans tuple attribute.
+
+    Returns:
+        bool: True if there were any cards to remove, else False.
+    """
     if len(player.caravans[idx].cards) > 0:
         player.caravans[idx].cards = []
         return True
@@ -35,6 +62,17 @@ def discard_caravan(idx, player):
 
 
 def discard_card(idx, player):
+    """Discard one of the cards in player's hand.
+
+    Args:
+        idx (int): Index of the card to be removed.
+
+        player (Player): Player object whose Player.hand attribute the card is to be removed from.
+
+    Returns:
+        bool: True if there were any cards to remove and the index 
+        was within that range of cards. Else False.
+    """
     if len(player.hand) > 0 and idx in range(0, len(player.hand)-1):
         player.hand.pop(idx)
         return True
