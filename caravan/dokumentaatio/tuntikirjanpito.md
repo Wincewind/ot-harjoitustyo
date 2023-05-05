@@ -27,6 +27,6 @@
 | 29.4. | 3    | Kommentoitu koodia, päivitetty dokumentaatiota |
 | 30.4. | 2    | Lisätty käyttöohje |
 | 2.5. | 1.5    | Kommentoitu koodia |
-| 5.5. | 2    | Kehitetty tekoäly vastustajaa |
+| 5.5. | 7    | Kehitetty tekoäly vastustajaa |
 | dd.M. | h    | Lorem Ipsum |
-| yht   | 76.5   | | 
+| yht   | 81.5   | | 
