@@ -1,3 +1,4 @@
+import copy
 from entities.caravan import Caravan
 from entities.deck import Deck
 
@@ -10,6 +11,7 @@ class Player:
         deck: A deck of cards object.
         hand: A list of card objects.
     """
+
     def __init__(self, deck: Deck) -> None:
         self.caravans = (Caravan(), Caravan(), Caravan())
         self.deck = deck
@@ -66,3 +68,13 @@ class Player:
                     card_info.append(str(caravan.cards[i]))
             out += f'{card_info[0]:15} {card_info[1]:15} {card_info[2]:15}\n'
         return out
+
+    def __copy__(self):
+        deck = copy.copy(self.deck)
+        player = Player(deck)
+        player.caravans = (copy.copy(self.caravans[0]),
+                           copy.copy(self.caravans[1]),
+                           copy.copy(self.caravans[2]))
+        player.hand = [copy.copy(crd) for crd in self.hand]
+        player.deck.cards = [copy.copy(crd) for crd in self.deck.cards]
+        return player

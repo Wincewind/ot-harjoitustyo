@@ -13,6 +13,7 @@ class PlayerData:
         card_sets: A collection of card sets to be picked from when creating a deck.
         _row_number: row number, related to the save slot when selecting the user data.
     """
+
     def __init__(self, name: str, wins: int, losses: int, row_number: int, card_sets: list) -> None:
         self.name = name
         self.wins = wins

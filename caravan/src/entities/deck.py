@@ -1,3 +1,4 @@
+import copy
 from random import shuffle
 from entities.cardset import CardSet
 
@@ -7,7 +8,9 @@ class Deck:
 
     Attributes:
         cards: list of the cards currently in the deck.
+        __cardset: Used to make a copy of the deck.
     """
+
     def __init__(self, cardset: CardSet) -> None:
         self.cards = []
         if len(cardset) < 30:
@@ -15,6 +18,7 @@ class Deck:
                 f"Caravan decks consist of at least 30 cards. Please add {30-len(cardset)} " +
                 "more cards to the set."
             )
+        self.__cardset = cardset
         self.cards = cardset.get_cards()
 
     def shuffle(self):
@@ -39,3 +43,8 @@ class Deck:
             new_cards.append(self.cards.pop())
             amount -= 1
         return new_cards
+
+    def __copy__(self):
+        deck = Deck(self.__cardset)
+        deck.cards = [copy.copy(c) for c in self.cards]
+        return deck

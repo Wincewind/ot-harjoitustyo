@@ -28,6 +28,7 @@ class StubEventQueue:
 class StubRenderer:
     def __init__(self) -> None:
         self.winner = 0
+
     def render(self):
         pass
 
@@ -73,6 +74,7 @@ class TestGameLoop(unittest.TestCase):
             self.sprites,
             StubEventQueue(events)
         )
+        game_loop.npc_opponent = False
         game_loop.start()
         self.assertTrue(game_loop._player_turn)
         self.assertEqual(game_loop._game_sprites.player.caravans[0].value, 10)
@@ -98,7 +100,13 @@ class TestGameLoop(unittest.TestCase):
             StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
             StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
             StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_LEFT),
+            StubEvent(pygame.KEYDOWN, pygame.K_RIGHT),
             StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_LEFT),
+            StubEvent(pygame.KEYDOWN, pygame.K_RIGHT),
+            StubEvent(pygame.KEYDOWN, pygame.K_UP),
+            StubEvent(pygame.KEYDOWN, pygame.K_DOWN),
             StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
             # StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
             # StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
@@ -110,6 +118,7 @@ class TestGameLoop(unittest.TestCase):
             self.sprites,
             StubEventQueue(events)
         )
+        game_loop.npc_opponent = False
         game_loop.start()
         self.assertEqual(
             [c.value for c in game_loop._game_sprites.player.caravans], [1, 0, 0])

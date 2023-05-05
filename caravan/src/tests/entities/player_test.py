@@ -1,4 +1,5 @@
 import unittest
+import copy
 from entities.deck import Deck
 from entities.cardset import CardSet
 from entities.player import Player
@@ -51,3 +52,8 @@ class TestPlayerEntity(unittest.TestCase):
         crds = ['Ace of \u2660', '5 of \u2665', '']
         self.assertEqual(self.player.get_caravans_as_str(),
                          f'{"Caravan 1:":15} {"Caravan 2:":15} {"Caravan 3:":15}\n{crds[0]:15} {crds[1]:15} {crds[2]:15}\n')
+
+    def test_copy(self):
+        pl_copy = copy.copy(self.player)
+        pl_copy.hand.pop()
+        self.assertNotEqual(len(self.player.hand), len(pl_copy.hand))

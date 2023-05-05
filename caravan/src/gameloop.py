@@ -5,6 +5,7 @@ from ui.eventqueue import EventQueue
 from ui.renderer import Renderer
 from ui.gamesprites import GameSprites
 from repositories.player_data_repository import player_data_repository
+from entities.npc import Npc
 
 
 class GameLoop:
@@ -24,6 +25,7 @@ class GameLoop:
         pl_name: Name of the player, associated with their player data. This is used to update 
         the player_data_repository wins and losses. 
     """
+
     def __init__(self, renderer: Renderer, game_sprites: GameSprites,
                  event_queue: EventQueue, name: str = None):
         pygame.display.set_caption("Caravan")
@@ -33,6 +35,9 @@ class GameLoop:
         self._states = ['turn_change', 'hand_selection', 'caravan_placement']
         self._player_turn = True
         self.pl_name = name
+
+        self.npc_opponent = True
+        self.npc = Npc(self._game_sprites.opponent, self._game_sprites.player)
 
     def start(self):
         """Starts the loop of handling events caused by user inputs.
@@ -55,6 +60,9 @@ class GameLoop:
         for event in self._event_queue.get():
             if event.type == pygame.KEYDOWN:
                 if self._states[0] == 'turn_change':
+                    if not self._player_turn and self.npc_opponent:
+                        self.npc_action()
+                        continue
                     if event.key == pygame.K_SPACE:
                         self._game_sprites.player_turn = self._player_turn
                         self._states.append(self._states.pop(0))
@@ -102,6 +110,14 @@ class GameLoop:
         if event.key == pygame.K_ESCAPE:
             self._states.insert(0, self._states.pop())
             self._game_sprites.player_turn = None
+        if event.key == pygame.K_c:
+            if actions.discard_card(self._game_sprites.player_selection,
+                                    self._game_sprites.acting_player):
+                self._game_sprites.player_turn = None
+                self._game_sprites.chosen_crd_sprite = None
+                self._game_sprites.update_hand_sprites()
+                self._player_turn = not self._player_turn
+                self._states.insert(0, self._states.pop())
 
     def handle_caravan_selection_event(self, event):
         """Modify the card sprites in caravans based on user inputs.
@@ -122,6 +138,15 @@ class GameLoop:
             self._game_sprites.chosen_crd_sprite = None
         if event.key == pygame.K_SPACE:
             self.try_placing_card()
+
+    def npc_action(self):
+        self.npc.perform_action()
+        self._game_sprites.update_hand_sprites()
+        self._game_sprites.chosen_crd_sprite = None
+        self._player_turn = not self._player_turn
+        if rules.is_player_winner(self._game_sprites.player,
+                                  self._game_sprites.opponent) is not None:
+            self._states.insert(0, "game_over")
 
     def try_placing_card(self):
         """Check if placing a card is possible into a caravan and if so, 

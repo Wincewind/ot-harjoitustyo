@@ -2,16 +2,17 @@
 discarding a caravan or a card.
 """
 import rules
+from entities.player import Player
 
 
-def play_card(player, opponent, move):
+def play_card(player: Player, opponent: Player, move):
     """Place a card into a caravan.
 
     Args:
         player (Player): represents the one performing the action.
-        
+
         opponent (Player): represents the opposing player during the action.
-        
+
         move (tuple): tuple of (caravan,index,card): Caravan into 
         which the card object is being placed, 
         index at which the card is being placed at in the caravan. 
@@ -23,6 +24,8 @@ def play_card(player, opponent, move):
     caravan = move[0]
     if not rules.check_if_legal_move(player, opponent, move)[0]:
         return False
+    # print('crd to play',move[2])
+    # print(player.get_hand_as_str())
     crd = player.play_card(player.hand.index(move[2]))
     if crd.special:
         cards_to_remove = []
@@ -61,7 +64,7 @@ def discard_caravan(idx, player):
     return False
 
 
-def discard_card(idx, player):
+def discard_card(idx, player: Player):
     """Discard one of the cards in player's hand.
 
     Args:
@@ -70,10 +73,11 @@ def discard_card(idx, player):
         player (Player): Player object whose Player.hand attribute the card is to be removed from.
 
     Returns:
-        bool: True if there were any cards to remove and the index 
+        bool: True if all caravans had been started, there were any cards to remove and the index 
         was within that range of cards. Else False.
     """
-    if len(player.hand) > 0 and idx in range(0, len(player.hand)-1):
-        player.hand.pop(idx)
+    all_car_started = all(c.started for c in player.caravans)
+    if all_car_started and len(player.hand) > 0 and idx in range(0, len(player.hand)-1):
+        player.play_card(idx)
         return True
     return False

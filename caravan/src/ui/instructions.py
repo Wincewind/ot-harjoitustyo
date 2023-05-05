@@ -8,6 +8,8 @@ def write_game_controls(display):
                                   "Confirm card placement in caravan: "],
                     "Arrow keys": ["Card selection /",
                                    "Switching card position in caravans: "],
+                    "C":["Discard a card from hand (only available",
+                         "once all caravans are started): "],
                     "Esc": ["Cancel selection: "]}
     text = config.FONT.render('', True, font_color)
     instructions_x = 0

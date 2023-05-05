@@ -206,7 +206,9 @@ def get_cards_removed_by_joker(player, opponent, move):
         check_if_legal_move for more thorough description.
 
     Returns:
-        list: A list of card objects that should be removed, if the action were to be performed.
+        list: A list of card objects that should be removed, 
+        if the action were to be performed and the card object, that joker is 
+        to be placed upon, which is protected from removal.
     """
     caravan, idx, _ = move
     if idx == -1:

@@ -1,3 +1,4 @@
+import copy
 from entities.card import Card
 
 
@@ -10,8 +11,9 @@ class Caravan:
         started: Important detail related to some game rules. This is set to True, 
                  once the first card is inserted into the cards and will stay so even if
                  the caravan is emptied.
-    
+
     """
+
     def __init__(self) -> None:
         self.cards = []
         self.started = False
@@ -67,6 +69,6 @@ class Caravan:
 
     def __copy__(self):
         caravan = Caravan()
-        caravan.cards = self.cards.copy()
+        caravan.cards = [copy.copy(c) for c in self.cards]
         caravan.started = self.started
         return caravan

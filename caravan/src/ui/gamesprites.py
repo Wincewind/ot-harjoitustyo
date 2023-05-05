@@ -31,6 +31,7 @@ class GameSprites:
         in which the moving of the card can be done before placing it and check if the placement is legal.
         op_display_caravans: Same as with pl_display_caravans but for the opponent-attribute.
     """
+
     def __init__(self, display, player: Player, opponent: Player) -> None:
         self._display = display
         self.player = player

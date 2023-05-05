@@ -4,7 +4,7 @@ from entities.cardset import CardSet
 from entities.card import Card
 
 
-class TestCardSetEntity(unittest.TestCase):
+class TestDeckEntity(unittest.TestCase):
     def setUp(self):
         self.cardset = CardSet()
         self.cardset.create_set_from_all_cards()
