@@ -32,4 +32,4 @@ Pelin koodin testauskattavuus on 90%
 
 ### Asennus ja konfigurointi
 
-Pelin lähdekoodin kloonaamista, julkaisujen lataamista ja riippuvaisuuksien/tiedostojen alustusta on testattu [käyttöohjeen](./dokumentaatio/kayttoohje.md) kuvaamalla tavalla Windows 11 sekä Linux-ympäristössä. Eri pygame ruudun resoluutioita ja tekoälyvastus asetusta on testattu muuttamalla konfiguraatioita _.env_-tiedostossa.
+Pelin lähdekoodin kloonaamista, julkaisujen lataamista ja riippuvaisuuksien/tiedostojen alustusta on testattu [käyttöohjeen](./kayttoohje.md) kuvaamalla tavalla Windows 11 sekä Linux-ympäristössä. Eri pygame ruudun resoluutioita ja tekoälyvastus asetusta on testattu muuttamalla konfiguraatioita _.env_-tiedostossa.
