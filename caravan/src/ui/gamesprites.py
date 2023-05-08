@@ -210,8 +210,6 @@ class GameSprites:
                     spr = CardSprite(crd, x, y)
                     if self._chosen_crd_sprite is not None and self._chosen_crd_sprite.card == crd:
                         move = (setup['caravan owner'].caravans[i], j, crd)
-                        print(rules.check_if_legal_move(
-                            self.acting_player, self.opposing_player, move))
                         if rules.check_if_legal_move(
                                 self.acting_player, self.opposing_player, move)[0]:
                             spr.set_overlay(CardSprite.OVERLAY_GREEN)
