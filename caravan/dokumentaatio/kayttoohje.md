@@ -2,7 +2,7 @@
 Toimivan version takaamiseksi, voit ladata viimeisimmän julkaistun version [Realeases](https://github.com/Wincewind/ot-harjoitustyo/releases) osiosta, Assets alta.
 
 ## Konfigurointi
-Pelaajan dataa säilötään .db tiedostossa, joka tallennetaan projekti-hakemiston [data](https://github.com/Wincewind/ot-harjoitustyo/tree/master/caravan/data)-kansioon. Tämän nimeä voidaan konfiguroida [.env](https://github.com/Wincewind/ot-harjoitustyo/blob/master/caravan/.env)-tiedostossa, sekä käyttöliittymän kokoa. Käyttöliittymän koon mittava muutos ei ole tällä hetkellä suositeltavaa, sillä kaikki elementit eivät skaalaannu sen mukana, pientä säätöä voi kuitenkin tehdä, jotta käyttöliittymä istuisi paremmin näytölle.
+Pelaajan dataa säilötään .db tiedostossa, joka tallennetaan projekti-hakemiston [data](https://github.com/Wincewind/ot-harjoitustyo/tree/master/caravan/data)-kansioon. Tämän nimeä voidaan konfiguroida [.env](https://github.com/Wincewind/ot-harjoitustyo/blob/master/caravan/.env)-tiedostossa, sekä käyttöliittymän kokoa. Käyttöliittymän koon mittava muutos ei ole tällä hetkellä suositeltavaa, sillä kaikki elementit eivät skaalaannu sen mukana, pientä säätöä voi kuitenkin tehdä, jotta käyttöliittymä istuisi paremmin näytölle. Tekoälyvastuksen päälle ja pois kytkemiseen on myös asetus NPC_OPPONENT. Tähän asettamalla `True`, voi asetuksen ottaa käyttöön.
 
 ## Ohjelman alustus
 Ennen ohjelman käynnistystä, täytyy riippuvaisuudet asentaa ja pelaaja datan säilömiseen tarkoitettu tietokanta muodostaa. Tämä tapahtuu siirtymällä caravan-hakemistoon ja ajamalla ensin komento:
