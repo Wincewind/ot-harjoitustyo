@@ -28,5 +28,5 @@
 | 30.4. | 2    | Lisätty käyttöohje |
 | 2.5. | 1.5    | Kommentoitu koodia |
 | 5.5. | 7    | Kehitetty tekoäly vastustajaa |
-| dd.M. | h    | Lorem Ipsum |
-| yht   | 81.5   | | 
+| 8.5. | 4    | Siistitty ja kommentoitu koodia, täydennetty ja lisätty dokumentaatiota |
+| yht   | 85.5   | | 
