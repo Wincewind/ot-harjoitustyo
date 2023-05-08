@@ -8,6 +8,15 @@ class DataNotFoundException(Exception):
 
 
 class PlayerDataRepository:
+    """Repository for player save data. Handles the communications with sqlite db. 
+
+    Attributes:
+        name: Name of the player.
+        wins: Number of wins.
+        losses: Number of losses.
+        card_sets: Card sets available to the player.
+        _connection: db connection.
+    """
     def __init__(self, connection) -> None:
         self.name = ''
         self.wins = 0
@@ -15,15 +24,17 @@ class PlayerDataRepository:
         self.card_sets = []
         self._connection = connection
 
-    def find_player_data(self, name):
+    def find_player_data(self, name, row_num):
+        """Find a player's data based on their name and save slot row number.
+        """
         cursor = self._connection.cursor()
         cursor.execute("""
             select Users.name, wins, losses, row_number, CardSets.name as cs_name
             from Users
             left join UserCardSets on UserCardSets.user_id = Users.id
             left join CardSets on UserCardSets.cardset_id = CardSets.id
-            where Users.name = ?;
-        """, (name,))
+            where Users.name = ? and row_number=?;
+        """, (name,row_num))
         data = cursor.fetchall()
         if len(data) == 0:
             raise DataNotFoundException(
@@ -33,6 +44,8 @@ class PlayerDataRepository:
                           data[0]['losses'], data[0]['row_number'], card_sets)
 
     def find_all_player_names(self):
+        """Find all available player names, row numbers, wins and losses in the db.
+        """
         cursor = self._connection.cursor()
         cursor.execute("""
             select name, row_number, wins, losses
@@ -43,6 +56,7 @@ class PlayerDataRepository:
                                   'losses': c['losses']} for c in cursor.fetchall()}
 
     def create_player_data(self, name, row_num):
+        "Create player data using a name and a row number to associate with it."
         cursor = self._connection.cursor()
         cursor.execute("""
             insert into Users
@@ -65,28 +79,34 @@ class PlayerDataRepository:
 
         self._connection.commit()
 
-    def delete_player_data(self, name):
+    def delete_player_data(self, name, row_num):
+        """Delete player data with specific name and row number.
+        """
         cursor = self._connection.cursor()
         cursor.execute("""
             delete from Users
-            where name=?;
-        """, (name,))
+            where name=? and row_number=?;
+        """, (name,row_num))
         self._connection.commit()
 
-    def increment_player_wins(self, name):
+    def increment_player_wins(self, name, row_num):
+        """Increment player data wins with specific name and row number.
+        """
         cursor = self._connection.cursor()
         cursor.execute("""
             update Users set wins = wins + 1
-            where name=?;
-        """, (name,))
+            where name=? and row_number=?;
+        """, (name,row_num))
         self._connection.commit()
 
-    def increment_player_losses(self, name):
+    def increment_player_losses(self, name, row_num):
+        """Increment player data losses with specific name and row number.
+        """
         cursor = self._connection.cursor()
         cursor.execute("""
             update Users set losses = losses + 1
-            where name=?;
-        """, (name,))
+            where name=? and row_number=?;
+        """, (name,row_num))
         self._connection.commit()
 
 

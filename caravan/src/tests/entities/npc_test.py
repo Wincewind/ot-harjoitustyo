@@ -54,6 +54,12 @@ class TestNpc(unittest.TestCase):
             c.insert_card(Card('sylly', 'Hearts', 9, False))
         self.npc._player.hand = [Card('sylly', 'Hearts', 9, False),
                                  Card('sylly', 'Hearts', 9, False)]
+        
+        #Remove any 9 cards from deck for the assertion to not have
+        # another 9 card be dealt back into hand.
+        for c in (c for c in self.npc._player.deck.cards if c.value == 9):
+            self.npc._player.deck.cards.remove(c)
+
         self.npc.perform_action()
         self.assertEqual(all(c.value == 19 for c in self.npc._player.caravans),True)
         self.assertEqual(len([c for c in self.npc._player.hand if c.value == 9]),1)

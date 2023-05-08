@@ -57,3 +57,5 @@ BIG_FONT = pygame.font.SysFont("Copperplate Gothic", 64)
 
 
 AVAILABLE_CARDSETS = ['sylly', 'minime453']
+
+NPC_OPPONENT = os.getenv("NPC_OPPONENT").lower() == 'true' or False

@@ -1,6 +1,7 @@
 import pygame
 import rules
 import actions
+import config
 from ui.eventqueue import EventQueue
 from ui.renderer import Renderer
 from ui.gamesprites import GameSprites
@@ -22,21 +23,22 @@ class GameLoop:
         These can currently be: 'turn_change', 'hand_selection', 'caravan_placement' or 'game_over'.
         _player_turn: bool value representing if it's the player's turn 
         (True) or the opponent's (False).
-        pl_name: Name of the player, associated with their player data. This is used to update 
+        pl_data_ids: Name and save slot row number associated with 
+        their player data. This is used to update 
         the player_data_repository wins and losses. 
     """
 
     def __init__(self, renderer: Renderer, game_sprites: GameSprites,
-                 event_queue: EventQueue, name: str = None):
+                 event_queue: EventQueue, pl_data_ids: tuple = None):
         pygame.display.set_caption("Caravan")
         self._renderer = renderer
         self._game_sprites = game_sprites
         self._event_queue = event_queue
         self._states = ['turn_change', 'hand_selection', 'caravan_placement']
         self._player_turn = True
-        self.pl_name = name
+        self.pl_data_ids = pl_data_ids
 
-        self.npc_opponent = True
+        self.npc_opponent = config.NPC_OPPONENT
         self.npc = Npc(self._game_sprites.opponent, self._game_sprites.player)
 
     def start(self):
@@ -44,14 +46,14 @@ class GameLoop:
         """
         while True:
             if self._handle_events() is False:
-                if self.pl_name is not None and self._renderer.winner == 0:
+                if self.pl_data_ids is not None and self._renderer.winner == 0:
                     player_data_repository.increment_player_losses(
-                        self.pl_name)
+                        self.pl_data_ids[0],self.pl_data_ids[1])
                 break
 
             self._render()
 
-    def _handle_events(self):  # pylint: disable=inconsistent-return-statements # Order needed for if __name__=='__main__': tests to work
+    def _handle_events(self):
         """Handle user events and depending on the current state, different actions are taken.
 
         Returns:
@@ -80,18 +82,19 @@ class GameLoop:
                                           self._game_sprites.opponent) is False:
                     winner = 2
 
-                if self.pl_name is not None:
+                if self.pl_data_ids is not None:
                     if winner == 2:
                         player_data_repository.increment_player_losses(
-                            self.pl_name)
+                            self.pl_data_ids[0],self.pl_data_ids[1])
                     else:
                         player_data_repository.increment_player_wins(
-                            self.pl_name)
+                            self.pl_data_ids[0],self.pl_data_ids[1])
 
                 self._renderer.winner = winner
 
             if event.type == pygame.QUIT:
                 return False
+        return None
 
     def handle_card_selection_event(self, event):
         """Modify the player hand sprites based on the user input.  
@@ -140,6 +143,8 @@ class GameLoop:
             self.try_placing_card()
 
     def npc_action(self):
+        """Perform an action for a npc opponent.
+        """
         self.npc.perform_action()
         self._game_sprites.update_hand_sprites()
         self._game_sprites.chosen_crd_sprite = None

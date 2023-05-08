@@ -37,4 +37,6 @@ class Card:
         return f"{card_value} of {Card.__suits[self.suit]}"
 
     def __copy__(self):
-        return Card(self.set, self.suit, self.value, self.special)
+        crd_copy = Card(self.set, self.suit, self.value, self.special)
+        crd_copy.total = self.total
+        return crd_copy

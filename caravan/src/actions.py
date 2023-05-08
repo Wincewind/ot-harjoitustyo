@@ -24,8 +24,6 @@ def play_card(player: Player, opponent: Player, move):
     caravan = move[0]
     if not rules.check_if_legal_move(player, opponent, move)[0]:
         return False
-    # print('crd to play',move[2])
-    # print(player.get_hand_as_str())
     crd = player.play_card(player.hand.index(move[2]))
     if crd.special:
         cards_to_remove = []

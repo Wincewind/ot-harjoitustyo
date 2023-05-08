@@ -3,6 +3,8 @@ from config import AVAILABLE_CARDSETS
 
 
 def drop_tables(connection):
+    """Drop the Users, UserCardSets and CardSets tables.
+    """
     cursor = connection.cursor()
     cursor.execute("""
         drop table if exists Users;
@@ -18,6 +20,8 @@ def drop_tables(connection):
 
 
 def create_tables(connection):
+    """Create Users, CardSets and UserCardSets tables into the db.
+    """
     cursor = connection.cursor()
     cursor.execute("""
         create table Users (
@@ -51,6 +55,8 @@ def create_tables(connection):
 
 
 def init_db():
+    """Drop the db's previous tables and create new ones.
+    """
     connection = get_database_connection()
     drop_tables(connection)
     create_tables(connection)

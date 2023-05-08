@@ -6,6 +6,11 @@ from entities.player_data import PlayerData
 
 
 class DeckCreation:
+    """A class for the deck creation UI. Currently only card set selection is available as an option.
+
+    Attributes:
+        pl_data: PlayerData object containing the information about player's available card sets.
+    """
     def __init__(self, display, event_queue, player_data: PlayerData):
         pygame.display.set_caption("Deck Selection")
         self._display = display
@@ -16,7 +21,7 @@ class DeckCreation:
         self._user_selection = None
         self._set_rects_info = [0, 0, 0]
         self._update_set_selection_rects()
-        self.draw_screen()
+        self._draw_screen()
 
     def _update_set_selection_rects(self):
         font_color = (0, 0, 0)
@@ -51,7 +56,7 @@ class DeckCreation:
                          border_radius=3)
         self._display.blit(text, text_xy)
 
-    def draw_screen(self):
+    def _draw_screen(self):
         for i in range(3):
             self._draw_rect_and_text(
                 self._set_rects_info[i]['rect_col'],
@@ -61,6 +66,12 @@ class DeckCreation:
         pygame.display.update()
 
     def main_loop(self):
+        """Loop to handle the user inputs regarding what card set they want to use to create their deck.
+
+        Returns:
+            Player: Once a card set is chosen, it's used to create a 
+            deck and a Player object is prepared using this. if the UI is quit, None is returned.
+        """
         while True:
             for event in self._event_queue.get():
                 self._user_selection = None
@@ -76,4 +87,4 @@ class DeckCreation:
 
                 if event.type == pygame.QUIT:
                     return None
-                self.draw_screen()
+                self._draw_screen()

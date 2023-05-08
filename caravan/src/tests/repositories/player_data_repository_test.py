@@ -13,16 +13,16 @@ class TestUserRepository(unittest.TestCase):
 
     def test_create_player_data(self):
         try:
-            pl_data = player_data_repository.find_player_data('Aku Ankka')
+            pl_data = player_data_repository.find_player_data('Aku Ankka',0)
         except DataNotFoundException as ex:
             self.assertEqual(
                 str(ex), 'No data found for player name "Aku Ankka"')
         player_data_repository.create_player_data('Aku Ankka', 0)
-        pl_data = player_data_repository.find_player_data('Aku Ankka')
+        pl_data = player_data_repository.find_player_data('Aku Ankka',0)
 
         self.assertEqual(pl_data.name, 'Aku Ankka')
         self.assertEqual((pl_data.wins, pl_data.losses,
-                         pl_data._row_number), (0, 0, 0))
+                         pl_data.row_number), (0, 0, 0))
 
     def test_find_all_names(self):
         self.assertEqual(
@@ -31,35 +31,24 @@ class TestUserRepository(unittest.TestCase):
         self.assertEqual(player_data_repository.find_all_player_names(), {})
 
     def test_delete_player_data(self):
-        player_data_repository.delete_player_data('Teppo Tulppu')
+        player_data_repository.delete_player_data('Teppo Tulppu',1)
         self.assertEqual({pd['name'] for pd in player_data_repository.find_all_player_names(
         ).values()}, {'Roope Ankka', 'Pelle Peloton'})
 
     def test_increment_wins(self):
         self.assertEqual(player_data_repository.find_player_data(
-            'Teppo Tulppu').wins, 0)
-        player_data_repository.increment_player_wins('Teppo Tulppu')
-        player_data_repository.increment_player_wins('Teppo Tulppu')
-        player_data_repository.increment_player_wins('Teppo Tulppu')
+            'Teppo Tulppu',1).wins, 0)
+        player_data_repository.increment_player_wins('Teppo Tulppu',1)
+        player_data_repository.increment_player_wins('Teppo Tulppu',1)
+        player_data_repository.increment_player_wins('Teppo Tulppu',1)
         self.assertEqual(player_data_repository.find_player_data(
-            'Teppo Tulppu').wins, 3)
+            'Teppo Tulppu',1).wins, 3)
 
     def test_increment_losses(self):
         self.assertEqual(player_data_repository.find_player_data(
-            'Teppo Tulppu').losses, 0)
-        player_data_repository.increment_player_losses('Teppo Tulppu')
-        player_data_repository.increment_player_losses('Teppo Tulppu')
-        player_data_repository.increment_player_losses('Teppo Tulppu')
+            'Teppo Tulppu',1).losses, 0)
+        player_data_repository.increment_player_losses('Teppo Tulppu',1)
+        player_data_repository.increment_player_losses('Teppo Tulppu',1)
+        player_data_repository.increment_player_losses('Teppo Tulppu',1)
         self.assertEqual(player_data_repository.find_player_data(
-            'Teppo Tulppu').losses, 3)
-
-    #     self.assertEqual(len(users), 2)
-    #     self.assertEqual(users[0].username, self.user_kalle.username)
-    #     self.assertEqual(users[1].username, self.user_matti.username)
-
-    # def test_find_by_username(self):
-    #     user_repository.create(self.user_kalle)
-
-    #     user = user_repository.find_by_username(self.user_kalle.username)
-
-    #     self.assertEqual(user.username, self.user_kalle.username)
+            'Teppo Tulppu',1).losses, 3)
