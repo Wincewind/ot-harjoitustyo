@@ -4,7 +4,7 @@ from repositories.player_data_repository import player_data_repository, DataNotF
 from entities.player_data import PlayerData
 
 
-class TestUserRepository(unittest.TestCase):
+class TestPlayerDataRepository(unittest.TestCase):
     def setUp(self):
         init_db()
         player_data_repository.create_player_data('Teppo Tulppu', 1)
