@@ -22,3 +22,6 @@
 - Lisätty pelaajan datalle (nimi, voitot, häviöt, käytössä olevat korttisarjat) tietokanta ja toiminnallisuudet tämän käsittelyyn.
 - Lisätty käyttöliittymään tallennuspaikan valinta, jolla voidaan valita/luoda/poistaa pelaaja datoja.
 - Lisätty käyttöliittymään korttisarjan valinta (pelkistetty versio pakan muodostamisesta yksittäisistä korteista).
+
+## Viikko 7
+- Lisätty yksinkertainen tekoäly vastus, jonka voi kytkeä päälle/pois .env tiedostosta NPC_OPPONENT konfiguraatiolla.
