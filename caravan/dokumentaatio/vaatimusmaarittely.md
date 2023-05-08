@@ -25,16 +25,21 @@ New Vegas             |  Oma pygame versio
   - [x] Mahdollisuus myös valita pakkaan kaikki saatavilla olevat korttisarjat.
 - [x] Oletus-pakka vaihtoehto.
 
-### Peli-moodit ja pelaajat
+### Peli-moodit, pelaajat ja pelin toiminnallisuudet
 
 Kaksi peli-moodia, tekoälyvastus ja Hotseat kaksinpeli. Hotseat-versiossa aloittava pelaaja saa nähdä kädessään olevat kortit ensin ja toinen pelaaja sulkee silmänsä kunnes hänen vuoronsa tulee. Pelaajan pelattua jonkun kortin, vuoro vaihtuu hetken viiveellä, jolloin toinen pelaaja saa avata silmänsä ja vuoronsa päättänyt sulkee omansa.
 - [x] Hotseat versio pelistä
 - [x] Yksinkertainen tekoälyvastus
+- [x] Korttien valinta, asetus ja poisto toiminnallisuus
+- [ ] Karavaanin poisto toiminnallisuus käyttöliittymään
 
 ## Jatkokehitysideoita
 
 Loppupalautuksen jälkeen peliä voidaan vielä täydentää esim. seuraavilla toiminnallisuuksilla:
 
+- Karavaanin poisto toiminnallisuuden lisääminen.
+  - Tämä jäi vielä puuttumaan pelin toiminnallisuuksista käyttöliittymä-versiossa. Halusin tehdä tätä varten visualisoinnin koko karavaanin valinnalle (overlay/highlight samanaikaisesti kaikkiin karavaanin kortteihin).
+  - Toiminnallisuus on teknisesti jo kehitetty ja tekoäly vastus voi sitä hyödyntää, mutta sen visualisointia tai valinnan suorittamista ei ole gamelooppiin vielä implementoitu. 
 - Korttipakan kasaaminen.
   - Tätä en ehtinyt kehittää loppupalautus-versioon, mutta se on mielestäni edelleen hyvin oleellinen osa alkuperäistä peliä.
 - Korttien keräily/ostamis mekaniikka ja ehkä tätä varten rahan voittaminen/häviäminen.
