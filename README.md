@@ -7,6 +7,7 @@ Caravan on kahden pelaajan pelattava korttipeli, jota pelataan tavallisilla 52 k
 - [Käyttöohje](caravan/dokumentaatio/kayttoohje.md)
 - [Vaatimusmaarittely.md](caravan/dokumentaatio/vaatimusmaarittely.md)
 - [Arkkitehtuuri.md](caravan/dokumentaatio/arkkitehtuuri.md)
+- [Testausdokumentti](caravan/dokumentaatio/testausdokumentti.md)
 - [Työaikakirjanpito](caravan/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](caravan/dokumentaatio/changelog.md)
 
