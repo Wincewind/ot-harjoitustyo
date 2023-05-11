@@ -29,4 +29,5 @@
 | 2.5. | 1.5    | Kommentoitu koodia |
 | 5.5. | 7    | Kehitetty tekoäly vastustajaa |
 | 8.5. | 4    | Siistitty ja kommentoitu koodia, täydennetty ja lisätty dokumentaatiota |
-| yht   | 85.5   | | 
+| 11.5. | 3    | Lisätty karavaanin poisto toiminnallisuus pelaajille, päivitetty dokumentaatiota  |
+| yht   | 88.5   | | 
