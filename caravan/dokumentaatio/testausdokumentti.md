@@ -25,7 +25,7 @@ Pelinkulkua ja tähän liittyvää interaktiota käyttöliittymän kanssa, joka 
 
 ### Testauskattavuus
 
-Pelin koodin testauskattavuus on 90%
+Pelin koodin testauskattavuus on 91%
 
 ![](./kuvat/coverage.png)
 
