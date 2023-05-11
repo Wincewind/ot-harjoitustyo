@@ -23,5 +23,7 @@
 - Lisätty käyttöliittymään tallennuspaikan valinta, jolla voidaan valita/luoda/poistaa pelaaja datoja.
 - Lisätty käyttöliittymään korttisarjan valinta (pelkistetty versio pakan muodostamisesta yksittäisistä korteista).
 
-## Viikko 7
+## Viikko 7 (Loppupalautus)
 - Lisätty yksinkertainen tekoäly vastus, jonka voi kytkeä päälle/pois .env tiedostosta NPC_OPPONENT konfiguraatiolla.
+- Saatu implementoitua kaikki pelaajan pelin aikana käytössä olevat toiminnot käyttöliittymä-versioon.
+  - Viimeisimpänä pelaajan karavaanin poisto.  
