@@ -44,6 +44,9 @@ Korttisarjan jälkeen avautuu itse pelikenttä näkymä:
 Vasemmassa yläkulmassa on pelin kontrolleihin ohjeet, mutta tässä vielä lyhyesti suomeksi:
 - Vuoron aloitus (kun kummankin pelaajan korteista näkyy vain takapuolet), kortin valinta pelaajan kädestä, sijoituksen valinta jostain keskellä olevasta kuudesta karavaanista: *Välilyönti*
 - Kädessä olevien korttien valinnan vaihto, kortin sijoituksen siirtäminen karavaaneissa ennen sen valintaa: *Nuolinäppäimet (vasen, oikea, ylös, alas)*
+- Kortin poistaminen kädestä, mahdollista vasta kun kaikiin karavaaneihin on laitettu yksi kortti pelin alettua: *C*
+- Oman karavaanin poistaminen, jos siinä on kortteja: *E*
+  - Tätä voi esim. hyödyntää myynti-arvon ylittäneen karavaanin uudelleen aloittamiseen.
 - Valinnan peruuttaminen: *Esc*
 - Pelin lopettaminen, myös pelin päätyttyä, kun toinen pelaajista on voittanut: *Sulkemalla ikkuna oikean yläkulman ruksista*. **Huom!** jos peli on vielä kesken kun ikkuna suljetaan, lasketaan tämä pelaajan häviöksi.  
 
