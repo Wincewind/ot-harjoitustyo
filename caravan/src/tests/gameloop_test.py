@@ -6,8 +6,6 @@ from entities.cardset import CardSet
 from entities.deck import Deck
 from entities.player import Player
 from entities.card import Card
-from ui.eventqueue import EventQueue
-from ui.renderer import Renderer
 from ui.gamesprites import GameSprites
 
 
@@ -44,13 +42,11 @@ class TestGameLoop(unittest.TestCase):
         deck = Deck(c_set)
         self.opponent = Player(deck)
         self.player.deck.shuffle()
-        # player.deal_a_hand()
         s10 = Card('sylly', 'Spades', 10, False)
         h9 = Card('sylly', 'Hearts', 9, False)
         h1 = Card('sylly', 'Hearts', 1, False)
         self.player.hand = [s10, h9, h1]
         self.opponent.deck.shuffle()
-        # self.opponent.deal_a_hand()
         s10 = Card('sylly', 'Spades', 10, False)
         h9 = Card('sylly', 'Hearts', 9, False)
         h1 = Card('sylly', 'Hearts', 1, False)
@@ -162,3 +158,47 @@ class TestGameLoop(unittest.TestCase):
         )
         game_loop.start()
         self.assertTrue(game_loop._states[0] == 'game_over')
+
+
+    def test_discarding_caravans(self):
+        s10 = Card('sylly', 'Spades', 10, False)
+        h9 = Card('sylly', 'Hearts', 9, False)
+        h2 = Card('sylly', 'Hearts', 2, False)
+        self.sprites.player.caravans[0].cards = [s10, h9, h2]
+        self.sprites.player.caravans[1].cards = [s10, h9, h2]
+        self.sprites.player.caravans[2].cards = [s10, h9]
+        self.sprites.player.hand = [h2]
+
+        events = [
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_RIGHT),
+            StubEvent(pygame.KEYDOWN, pygame.K_RIGHT),
+            StubEvent(pygame.KEYDOWN, pygame.K_c),
+            StubEvent(pygame.KEYDOWN, pygame.K_LEFT),
+            StubEvent(pygame.KEYDOWN, pygame.K_e),
+            StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE),
+            StubEvent(pygame.KEYDOWN, pygame.K_e),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_e),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_e),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.KEYDOWN, pygame.K_e),
+            StubEvent(pygame.KEYDOWN, pygame.K_SPACE),
+            StubEvent(pygame.QUIT, None)
+        ]
+
+        game_loop = GameLoop(
+            StubRenderer(),
+            self.sprites,
+            StubEventQueue(events)
+        )
+        game_loop.npc_opponent = True
+        game_loop.start()
+        self.assertEqual([c.value for c in game_loop._game_sprites.player.caravans], [0, 0, 0])

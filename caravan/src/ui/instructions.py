@@ -4,12 +4,13 @@ import config
 
 def write_game_controls(display):
     font_color = (255, 255, 255)
-    instructions = {"Space bar": ["Start turn /", "Select card /",
+    instructions = {"Space bar": ["Start turn /", "Select card /", "Select caravan /",
                                   "Confirm card placement in caravan: "],
                     "Arrow keys": ["Card selection /",
                                    "Switching card position in caravans: "],
                     "C":["Discard a card from hand (only available",
                          "once all caravans are started): "],
+                    "E":["Discard one of your caravans if it contains cards: "],
                     "Esc": ["Cancel selection: "]}
     text = config.FONT.render('', True, font_color)
     instructions_x = 0

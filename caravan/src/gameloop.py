@@ -20,7 +20,8 @@ class GameLoop:
         _event_queue: EventQueue object that outputs the user inputs.
         _states: a list of states the game can be in and are used to only 
         monitor for certain user inputs depending on the state. 
-        These can currently be: 'turn_change', 'hand_selection', 'caravan_placement' or 'game_over'.
+        These can currently be: 'turn_change', 'hand_selection', 
+        'caravan_placement', 'caravan_discarding' or 'game_over'.
         _player_turn: bool value representing if it's the player's turn 
         (True) or the opponent's (False).
         pl_data_ids: Name and save slot row number associated with 
@@ -76,6 +77,9 @@ class GameLoop:
                 elif self._states[0] == 'caravan_placement':
                     self.handle_caravan_selection_event(event)
 
+                elif self._states[0] == 'caravan_discarding':
+                    self.handle_caravan_discarding_event(event)
+
             if self._states[0] == 'game_over' and self._renderer.winner == 0:
                 winner = 1
                 if rules.is_player_winner(self._game_sprites.player,
@@ -95,6 +99,15 @@ class GameLoop:
             if event.type == pygame.QUIT:
                 return False
         return None
+
+    def _init_carava_discard(self):
+        try:
+            self._game_sprites.selected_caravan = next(i for i, c in enumerate(
+                self._game_sprites.acting_player.caravans) if len(c.cards) > 0)
+            self._states.insert(0, 'caravan_discarding')
+            self._game_sprites.update_hand_sprites()
+        except StopIteration:
+            pass
 
     def handle_card_selection_event(self, event):
         """Modify the player hand sprites based on the user input.  
@@ -117,10 +130,33 @@ class GameLoop:
             if actions.discard_card(self._game_sprites.player_selection,
                                     self._game_sprites.acting_player):
                 self._game_sprites.player_turn = None
-                self._game_sprites.chosen_crd_sprite = None
                 self._game_sprites.update_hand_sprites()
                 self._player_turn = not self._player_turn
                 self._states.insert(0, self._states.pop())
+        if event.key == pygame.K_e:
+            self._init_carava_discard()
+
+    def handle_caravan_discarding_event(self,event):
+        """Modify acting player caravan sprites, if they contain cards. 
+        Discard a caravan or cancel action based on user input. 
+
+        Args:
+            event (pygame.event): user input.
+        """
+        if event.key in [pygame.K_SPACE,pygame.K_e]:
+            if actions.discard_caravan(self._game_sprites.selected_caravan,
+                                       self._game_sprites.acting_player):
+                self._game_sprites.selected_caravan = None
+                self._states = ['turn_change', 'hand_selection', 'caravan_placement']
+                self._game_sprites.player_turn = None
+                self._player_turn = not self._player_turn
+        if event.key == pygame.K_LEFT:
+            self._game_sprites.selected_caravan -= 1
+        if event.key == pygame.K_RIGHT:
+            self._game_sprites.selected_caravan += 1
+        if event.key == pygame.K_ESCAPE:
+            self._states.pop(0)
+            self._game_sprites.selected_caravan = None
 
     def handle_caravan_selection_event(self, event):
         """Modify the card sprites in caravans based on user inputs.

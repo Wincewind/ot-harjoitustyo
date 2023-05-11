@@ -43,6 +43,7 @@ class GameSprites:
         self.all = pygame.sprite.Group()
         self._player_selection = 0
         self._chosen_crd_sprite = None
+        self._selected_caravan = None
 
         self._initialize_sprites()
 
@@ -306,3 +307,48 @@ class GameSprites:
         self.pos = (caravan_idx, placement_idx)
         self.clear_caravan_area()
         self.update_caravan_sprites()
+
+    @property
+    def selected_caravan(self):
+        return self._selected_caravan
+
+    @selected_caravan.setter
+    def selected_caravan(self, idx: int):
+        if idx is not None:
+            if idx >= 2:
+                self._selected_caravan = 2
+            elif idx <= 0:
+                self._selected_caravan = 0
+            else:
+                self._selected_caravan = idx
+        else:
+            self._selected_caravan = idx
+            self._reset_display_caravans()
+        self._reset_display_caravans()
+        self._visualize_selected_caravan()
+
+    def _visualize_selected_caravan(self):
+        self.caravan_sprites = pygame.sprite.Group()
+        player = self.acting_player
+        opponent = self.opposing_player
+        if self.acting_player == self.opponent:
+            player, opponent = opponent, player
+
+        pl_setup_details = {'caravan rects': config.PLAYER_CARAVAN_BASE_RECTS,
+                            'display caravans': self.pl_display_caravans,
+                            'caravan owner': player,
+                            'caravan direction': 1}
+        op_setup_details = {'caravan rects': config.OPPONENT_CARAVAN_BASE_RECTS,
+                            'display caravans': self.op_display_caravans,
+                            'caravan owner': opponent,
+                            'caravan direction': -1}
+        for setup in [pl_setup_details, op_setup_details]:
+            for i, caravan in enumerate(setup['display caravans']):
+                x = setup['caravan rects'][i][0]+5
+                y = setup['caravan rects'][i][1]+5
+                for j, crd in enumerate(caravan.cards):
+                    spr = CardSprite(crd, x, y)
+                    if self._selected_caravan == i and setup['caravan owner'] is self.acting_player:
+                        spr.set_overlay(CardSprite.OVERLAY_YELLOW)
+                    self.caravan_sprites.add(spr)
+                    y = y + setup['caravan direction']*config.CARD_HEIGHT/3.5
